@@ -5,24 +5,6 @@ import NavItem from "./NavItem";
 import { useState } from "react";
 import Link from "next/link";
 
-const links = [
-  {
-    key: "inicio",
-    label: "Inicio",
-    route: "/",
-  },
-  {
-    key: "productos",
-    label: "Productos",
-    route: "/productos",
-  },
-  {
-    key: "contacto",
-    label: "Contacto",
-    route: "/contacto",
-  },
-];
-
 export default function Navigation() {
   const [clicked, setClicked] = useState(false);
   const handleClicked = () => {
@@ -67,3 +49,21 @@ export default function Navigation() {
     </header>
   );
 }
+
+const links = [
+  {
+    key: "inicio",
+    label: "Inicio",
+    route: "/",
+  },
+  {
+    key: "productos",
+    label: "Productos",
+    route: "/productos",
+  },
+  {
+    key: "contacto",
+    label: "Contacto",
+    route: "/contacto",
+  },
+];
