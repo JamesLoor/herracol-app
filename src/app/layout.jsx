@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="es" className={lato.className}>
       <body>
         <Navigation />
-        <main>{children}</main>
+        <main className="pt-[69px]">{children}</main>
         <Footer />
       </body>
     </html>

@@ -25,6 +25,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         header: "max-content max-content",
+        banner: "1.5fr 1fr",
       },
     },
   },

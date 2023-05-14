@@ -27,7 +27,7 @@ export default function Navigation() {
       <nav
         className={`${
           clicked ? "left-0" : "-left-full"
-        } absolute z-50 top-0 bottom-0 w-screen h-screen grid justify-center items-center bg-primary ease-in duration-300 md:static md:w-full md:h-full md:text-right`}
+        } absolute z-50 top-0 bottom-0 w-screen h-screen grid justify-center items-center bg-primary ease-in duration-300 md:transition-none md:static md:w-full md:h-full md:text-right`}
       >
         <button
           className="absolute top-2 right-[5%] md:hidden"

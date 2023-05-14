@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="grid gap-10 pt-[80px] px-[4%] md:grid-cols-4">
+    <footer className="grid gap-10 px-[4%] md:grid-cols-4">
       <div className="grid place-items-center text-center">
         <Image
           src="/assets/footer-logo.png"
