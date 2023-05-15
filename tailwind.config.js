@@ -27,6 +27,9 @@ module.exports = {
         header: "max-content max-content",
         banner: "1.5fr 1fr",
       },
+      gridTemplateRows: {
+        footer: "min-content min-content",
+      },
     },
   },
   plugins: [],
