@@ -1,17 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="grid gap-10 px-[4%] md:grid-cols-4">
-      <div className="grid place-items-center text-center">
+    <footer className="grid gap-10 px-[4%] py-10 md:grid-cols-4">
+      <div className="grid grid-rows-footer place-items-center">
         <Image
           src="/assets/footer-logo.png"
           width={188}
           height={126}
           alt="Logo Herracol"
         />
-        <span>© Herracol 2023</span>
+        <span>© Herracol {new Date().getFullYear()}</span>
       </div>
       {content.map(({ key, title, links }) => {
         return (
