@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <section className="grid gap-8 items-center min-h-[calc(100vh-69px)] w-full px-[4%] mx-[auto] py-10 md:grid-cols-banner">
         <div className="grid order-2 gap-4 md:gap-6 md:order-1">
-          <h1 className="text-3xl md:text-6xl font-bold">{banner.title}</h1>
+          <h1 className="text-3xl lg:text-5xl font-bold">{banner.title}</h1>
           <p className="leading-relaxed md:text-lg">{banner.text}</p>
           <ButtonLink route={banner.cta.route}>{banner.cta.label}</ButtonLink>
         </div>
@@ -22,6 +22,26 @@ export default function Home() {
           />
         </div>
       </section>
+      <section className="grid gap-8 px-[4%] py-10 w-full">
+        <h2 className="text-3xl lg:text-5xl font-bold text-center">
+          Nuestras Marcas
+        </h2>
+        <figure className="grid gap-3 lg:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {brands.map(({ route, alt }) => {
+            return (
+              <Image
+                key="brand"
+                src={route}
+                alt={alt}
+                width={300}
+                height={300}
+                quality={100}
+                className="w-full h-auto"
+              />
+            );
+          })}
+        </figure>
+      </section>
     </>
   );
 }
@@ -35,3 +55,54 @@ const banner = {
   },
   image: "/assets/logoHerracolRounded.png",
 };
+
+const brands = [
+  {
+    route: "/assets/brands/logoBolt.png",
+    alt: "Logo Bolt",
+  },
+  {
+    route: "/assets/brands/logoGermany.png",
+    alt: "Logo Germany",
+  },
+  {
+    route: "/assets/brands/logoGavilan.png",
+    alt: "Logo Gavilan",
+  },
+  {
+    route: "/assets/brands/logoIncolma.png",
+    alt: "Logo Incolma",
+  },
+  {
+    route: "/assets/brands/logoColima.png",
+    alt: "Logo Colima",
+  },
+  {
+    route: "/assets/brands/logoAbro.png",
+    alt: "Logo Abro",
+  },
+  {
+    route: "/assets/brands/logoNorton.png",
+    alt: "Logo Norton",
+  },
+  {
+    route: "/assets/brands/logoSaintGobain.png",
+    alt: "Logo Saint Gobain",
+  },
+  {
+    route: "/assets/brands/logoCaribe.png",
+    alt: "Logo Caribe",
+  },
+  {
+    route: "/assets/brands/logoTEKBOND.png",
+    alt: "Logo TEKBOND",
+  },
+  {
+    route: "/assets/brands/logoPractiagro.png",
+    alt: "Logo Practiagro",
+  },
+  {
+    route: "/assets/brands/logoAgrimix.png",
+    alt: "Logo Agrimix",
+  },
+];
