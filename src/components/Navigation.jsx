@@ -40,7 +40,7 @@ export default function Navigation() {
             alt="Menu Icon"
           />
         </button>
-        <ul className="grid gap-5 text-center md:flex md:gap-8 md:items-center">
+        <ul className="grid gap-6 text-center md:flex md:gap-10 md:items-center">
           {links.map(({ key, route, label }) => {
             return <NavItem key={key} route={route} label={label} />;
           })}
