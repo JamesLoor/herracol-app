@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export default function NavItem({ route, label }) {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(route);
+  const isActive = pathname === route;
   return (
     <li className="text-white text-[18px] font-bold">
       <Link
