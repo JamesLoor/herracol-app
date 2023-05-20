@@ -22,9 +22,9 @@ export default function Footer() {
               <h5 className="text-2xl font-extrabold">{title}</h5>
             </div>
             <ul className="grid gap-3 mt-3">
-              {links.map(({ route, label }) => {
+              {links.map(({ key, route, label }) => {
                 return (
-                  <li key={route}>
+                  <li key={key}>
                     <Link href={route}>{label}</Link>
                   </li>
                 );
@@ -49,7 +49,8 @@ const content = [
       },
       {
         key: "catalogoHerramientas",
-        route: "/",
+        route:
+          "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FHerracol%2FCatalogoHerracol2022.pdf?alt=media",
         label: "Catálogo Herramientas",
       },
       {
