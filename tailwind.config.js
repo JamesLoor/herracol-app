@@ -26,6 +26,8 @@ module.exports = {
       gridTemplateColumns: {
         header: "max-content max-content",
         banner: "1.5fr 1fr",
+        contact: "1fr max-content",
+        contactInfo: "250px 1fr",
       },
       gridTemplateRows: {
         footer: "min-content min-content",
