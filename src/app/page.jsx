@@ -36,7 +36,7 @@ export default function Home() {
         className="grid gap-8 items-center w-full px-[4%] mx-[auto] py-10 md:grid-cols-2"
       >
         <div className="grid order-2 gap-4 md:gap-6 ">
-          <h2 className="text-3xl lg:text-5xl font-bold">{services.title}</h2>
+          <h2 className="text-2xl lg:text-4xl font-bold">{services.title}</h2>
           <p className="leading-relaxed md:text-lg text-justify">
             {services.text}
           </p>
@@ -67,7 +67,7 @@ export default function Home() {
       </section>
 
       <section id="brands" className="grid gap-8 px-[4%] py-10 w-full">
-        <h2 className="text-3xl lg:text-5xl font-bold text-center">
+        <h2 className="text-2xl lg:text-4xl font-bold text-center">
           Nuestras Marcas
         </h2>
         <figure className="grid gap-3 lg:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
