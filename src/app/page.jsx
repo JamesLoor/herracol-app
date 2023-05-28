@@ -74,7 +74,7 @@ export default function Home() {
           {brands.map(({ route, alt }) => {
             return (
               <Image
-                key="brand"
+                key={alt}
                 src={route}
                 alt={alt}
                 width={300}
@@ -110,19 +110,19 @@ const services = {
   list: [
     { key: "item-1", text: "Vidrio Crudo" },
     { key: "item-2", text: "Vidrio Templado" },
-    { key: "item-1", text: "Vidrio Laminado" },
+    { key: "item-3", text: "Vidrio Laminado" },
     {
-      key: "item-3",
+      key: "item-4",
       text: "Puertas de baño en Acero Inoxidable y vidrio Templado",
     },
-    { key: "item-4", text: "Vidrios de Control Solar y baja emisividad" },
+    { key: "item-5", text: "Vidrios de Control Solar y baja emisividad" },
     {
-      key: "item-5",
+      key: "item-6",
       text: "Trabajos de Alucubond en Aluminio Compuesto y Policarbonato.",
     },
-    { key: "item-6", text: "Pérgolas" },
+    { key: "item-7", text: "Pérgolas" },
     {
-      key: "item-7",
+      key: "item-8",
       text: "Instalación con Acero Inoxidable en pasamanos, mamparas, entre otras aplicaciones",
     },
   ],
