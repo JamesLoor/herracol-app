@@ -57,6 +57,11 @@ const links = [
     route: "/",
   },
   {
+    key: "obras",
+    label: "Obras",
+    route: "/obras",
+  },
+  {
     key: "productos",
     label: "Productos",
     route: "/productos",
