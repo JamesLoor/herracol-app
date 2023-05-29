@@ -41,7 +41,7 @@ const policy = {
     {
       title: "5. Cambios en la política de privacidad",
       paragraph:
-        "SAVTEK SYSTEMS LLC se reserva el derecho de modificar esta Política de Privacidad en cualquier momento y sin previo aviso. Al utilizar este sitio web, usted acepta cumplir con la política de privacidad vigente en ese momento.",
+        "HERRACOL S.A. se reserva el derecho de modificar esta Política de Privacidad en cualquier momento y sin previo aviso. Al utilizar este sitio web, usted acepta cumplir con la política de privacidad vigente en ese momento.",
     },
     {
       title: "6. Uso de cookies",

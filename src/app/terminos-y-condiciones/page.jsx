@@ -26,22 +26,22 @@ const terms = {
     {
       title: "2. Derechos de propiedad intelectual",
       paragraph:
-        "Todos los derechos de propiedad intelectual relacionados con el contenido, diseño, logotipos, imágenes y demás elementos de este sitio web son propiedad de SAVTEK SYSTEMS LLC o sus licenciantes. Queda prohibida la reproducción, distribución, comunicación pública o transformación de estos elementos sin la autorización previa y por escrito de [nombre de la empresa] o sus licenciantes.",
+        "Todos los derechos de propiedad intelectual relacionados con el contenido, diseño, logotipos, imágenes y demás elementos de este sitio web son propiedad de HERRACOL S.A. o sus licenciantes. Queda prohibida la reproducción, distribución, comunicación pública o transformación de estos elementos sin la autorización previa y por escrito de HERRACOL S.A. o sus licenciantes.",
     },
     {
       title: "3. Uso del formulario de contacto",
       paragraph:
-        "Al proporcionar su información personal a través del formulario de contacto, usted acepta que SAVTEK SYSTEMS LLC pueda utilizar esa información para contactarlo con respecto a sus servicios. Al proporcionar su información, usted garantiza que es veraz, exacta y actualizada.",
+        "Al proporcionar su información personal a través del formulario de contacto, usted acepta que HERRACOL S.A. pueda utilizar esa información para contactarlo con respecto a sus servicios. Al proporcionar su información, usted garantiza que es veraz, exacta y actualizada.",
     },
     {
       title: "4. Limitación de responsabilidad",
       paragraph:
-        "SAVTEK SYSTEMS LLC no será responsable de ningún daño o pérdida que pueda resultar del uso de este sitio web o la información contenida en él. SAVTEK SYSTEMS LLC no garantiza que el sitio web esté libre de errores, virus u otros elementos dañinos.",
+        "HERRACOL S.A. no será responsable de ningún daño o pérdida que pueda resultar del uso de este sitio web o la información contenida en él. HERRACOL S.A. no garantiza que el sitio web esté libre de errores, virus u otros elementos dañinos.",
     },
     {
       title: "5. Modificaciones de los términos y condiciones",
       paragraph:
-        "SAVTEK SYSTEMS LLC se reserva el derecho de modificar estos Términos y Condiciones de Uso en cualquier momento y sin previo aviso. Al utilizar este sitio web, usted acepta cumplir con los términos y condiciones vigentes en ese momento.",
+        "HERRACOL S.A. se reserva el derecho de modificar estos Términos y Condiciones de Uso en cualquier momento y sin previo aviso. Al utilizar este sitio web, usted acepta cumplir con los términos y condiciones vigentes en ese momento.",
     },
   ],
   date: "Fecha de la última actualización: 28/05/2023",
