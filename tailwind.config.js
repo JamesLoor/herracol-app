@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    "./node_modules/flowbite-react/**/*.js",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -28,11 +29,18 @@ module.exports = {
         banner: "1.5fr 1fr",
         contact: "1fr max-content",
         contactInfo: "250px 1fr",
+        products: "repeat(auto-fill, minmax(215px, 1fr))",
+        productsCategory: "265px 1fr",
+        productsFilters: "max-content max-content 1fr",
+        productsFiltersMd: "max-content 1fr",
+        modalProductFeatures: "max-content max-content",
+        modalContentContainer: "300px 1fr",
       },
       gridTemplateRows: {
         footer: "min-content min-content",
+        productsCard: "250px 1fr",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar"), require("flowbite/plugin")],
 };
