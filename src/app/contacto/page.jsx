@@ -36,16 +36,28 @@ export default function Contact() {
           </div>
 
           <div className="w-full grid gap-6 md:order-[-1] lg:grid-cols-contactInfo">
-            {contactMethods.map((info) => {
+            {contactMethods.map(({ component, id, icon, label, ...props }) => {
+              if (component === "a") {
+                return (
+                  <a
+                    key={id}
+                    className="w-fit flex gap-4 items-center"
+                    {...props}
+                  >
+                    <Image width={30} height={30} src={icon} alt={id} />
+                    <h4>{label}</h4>
+                  </a>
+                );
+              }
+
               return (
                 <Link
-                  href={info.href}
-                  target="_blank"
-                  key={info.id}
+                  key={id}
                   className="w-fit flex gap-4 items-center"
+                  {...props}
                 >
-                  <Image width={30} height={30} src={info.icon} alt={info.id} />
-                  <h4>{info.value}</h4>
+                  <Image width={30} height={30} src={icon} alt={id} />
+                  <h4>{label}</h4>
                 </Link>
               );
             })}
@@ -60,34 +72,41 @@ const contactMethods = [
   {
     id: "whatsapp",
     icon: "/icons/whatsapp.svg",
-    value: "+593 98 324 5586",
     href: "https://wa.me/593983245586",
+    label: "+593 98 324 5586",
+    target: "_blank",
+    prefetch: false,
   },
-
   {
     id: "location",
     icon: "/icons/map.svg",
-    value:
-      "Via a Daule km 11.5 Bodegas C7 y C41 Parque California 2 - Guayaquil - Ecuador",
     href: "https://www.google.com/maps/place/Parque+california+2+bodegas/@-2.096338,-79.937145,16z/data=!4m6!3m5!1s0x902d0d416a07ba3f:0x343b7937a49a3d51!8m2!3d-2.0963376!4d-79.937145!16s%2Fg%2F11clstkck_?hl=es",
+    label:
+      "Via a Daule km 11.5 Bodegas C7 y C41 Parque California 2 - Guayaquil - Ecuador",
+    target: "_blank",
+    prefetch: false,
   },
   {
     id: "instagram",
     icon: "/icons/instagram.svg",
-    value: "@herracol_sa",
     href: "https://www.instagram.com/herracol_sa/?hl=es",
+    label: "@herracol_sa",
+    target: "_blank",
+    prefetch: false,
   },
   {
     id: "email",
     icon: "/icons/mail.svg",
-    value:
-      "info@herracol.net - ventas@herracol.net - importaciones@herracol.net",
     href: "mailto:info@herracol.net",
+    label:
+      "info@herracol.net - ventas@herracol.net - importaciones@herracol.net",
+    component: "a",
   },
   {
     id: "phone",
     icon: "/icons/phone.svg",
-    value: "+593 4 2103460",
     href: "tel:+593983245586",
+    label: "+593 4 2103460",
+    component: "a",
   },
 ];

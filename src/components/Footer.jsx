@@ -22,10 +22,22 @@ export default function Footer() {
               <h5 className="text-2xl font-extrabold">{title}</h5>
             </div>
             <ul className="grid gap-3 mt-3">
-              {links.map(({ key, route, label }) => {
+              {links.map(({ component, key, route, label, ...props }) => {
+                if (component === "a") {
+                  return (
+                    <li key={key}>
+                      <a href={route} {...props}>
+                        {label}
+                      </a>
+                    </li>
+                  );
+                }
+
                 return (
                   <li key={key}>
-                    <Link href={route}>{label}</Link>
+                    <Link href={route} {...props}>
+                      {label}
+                    </Link>
                   </li>
                 );
               })}
@@ -52,11 +64,14 @@ const content = [
         route:
           "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FHerracol%2FCatalogoHerracol2022.pdf?alt=media",
         label: "Catálogo Herramientas",
+        target: "_blank",
       },
       {
         key: "catalogoObras",
-        route: "/",
+        route:
+          "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FCata%CC%81logo%20de%20Obras%20.pdf?alt=media",
         label: "Catálogo Obras",
+        target: "_blank",
       },
     ],
   },
@@ -66,18 +81,22 @@ const content = [
     links: [
       {
         key: "direccion",
-        route: "/",
+        route:
+          "https://www.google.com/maps/place/Parque+california+2+bodegas/@-2.096338,-79.937145,16z/data=!4m6!3m5!1s0x902d0d416a07ba3f:0x343b7937a49a3d51!8m2!3d-2.0963376!4d-79.937145!16s%2Fg%2F11clstkck_?hl=es",
         label: "Via a Daule km 11.5 Bodegas C7 y C41 Parque California 2",
+        target: "_blank",
       },
       {
         key: "correo",
-        route: "/",
+        route: "mailto:info@herracol.net",
         label: "info@herracol.net",
+        component: "a",
       },
       {
         key: "celular",
-        route: "/",
+        route: "tel:+593983245586",
         label: "+593 98 324 5586",
+        component: "a",
       },
     ],
   },
@@ -87,13 +106,15 @@ const content = [
     links: [
       {
         key: "terminos",
-        route: "/",
+        route: "/terminos-y-condiciones",
         label: "Términos y condiciones",
+        target: "_blank",
       },
       {
         key: "politica",
-        route: "/",
-        label: "Política de privacidad",
+        route: "/politicas-de-privacidad",
+        label: "Políticas de privacidad",
+        target: "_blank",
       },
     ],
   },
