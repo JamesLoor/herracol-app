@@ -2,6 +2,7 @@ import "../../styles/globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Lato } from "next/font/google";
+import { ProductsProvider } from "@/context/products";
 
 const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700", "900"] });
 
@@ -13,10 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className={lato.className}>
-      <body>
-        <Navigation />
-        <main className="pt-[69px]">{children}</main>
-        <Footer />
+      <body className="!overflow-visible">
+        <ProductsProvider>
+          <Navigation />
+          <main className="pt-[69px]">{children}</main>
+          <Footer />
+        </ProductsProvider>
       </body>
     </html>
   );
