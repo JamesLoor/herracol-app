@@ -1,35 +1,3 @@
-export const metadata = {
-  title: `${policy.title} | Herracol S.A.`,
-  description:
-    "Tu privacidad es importante para nosotros. Descubre cómo recogemos, usamos y protegemos tu información personal en nuestra Política de Privacidad. Estamos comprometidos con la transparencia y la seguridad de tus datos.",
-  openGraph: {
-    title: `${policy.title} | Herracol S.A.`,
-    description:
-      "Tu privacidad es importante para nosotros. Descubre cómo recogemos, usamos y protegemos tu información personal en nuestra Política de Privacidad. Estamos comprometidos con la transparencia y la seguridad de tus datos.",
-    url: "https://herracol.net/politicas-de-privacidad",
-  },
-  alternates: {
-    canonical: "https://herracol.net/politicas-de-privacidad",
-  },
-};
-
-export default function PolicyOfPrivacy() {
-  return (
-    <section className="pt-[50px] px-[4%] max-w-[1280px] mx-auto">
-      <h2 class="mb-8 text-3xl font-bold">{policy.title}</h2>
-      {policy.items.map((item) => {
-        return (
-          <>
-            <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
-            <p className="mb-6">{item.paragraph}</p>
-          </>
-        );
-      })}
-      <p class="mb-6">{policy.date}</p>
-    </section>
-  );
-}
-
 const policy = {
   title: "Política de Privacidad",
   items: [
@@ -76,3 +44,35 @@ const policy = {
   ],
   date: "Fecha de la última actualización: 28/05/2023",
 };
+
+export const metadata = {
+  title: `${policy.title} | Herracol S.A.`,
+  description:
+    "Tu privacidad es importante para nosotros. Descubre cómo recogemos, usamos y protegemos tu información personal en nuestra Política de Privacidad. Estamos comprometidos con la transparencia y la seguridad de tus datos.",
+  openGraph: {
+    title: `${policy.title} | Herracol S.A.`,
+    description:
+      "Tu privacidad es importante para nosotros. Descubre cómo recogemos, usamos y protegemos tu información personal en nuestra Política de Privacidad. Estamos comprometidos con la transparencia y la seguridad de tus datos.",
+    url: "https://herracol.net/politicas-de-privacidad",
+  },
+  alternates: {
+    canonical: "https://herracol.net/politicas-de-privacidad",
+  },
+};
+
+export default function PolicyOfPrivacy() {
+  return (
+    <section className="pt-[50px] px-[4%] max-w-[1280px] mx-auto">
+      <h2 class="mb-8 text-3xl font-bold">{policy.title}</h2>
+      {policy.items.map((item) => {
+        return (
+          <>
+            <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
+            <p className="mb-6">{item.paragraph}</p>
+          </>
+        );
+      })}
+      <p class="mb-6">{policy.date}</p>
+    </section>
+  );
+}

@@ -1,35 +1,3 @@
-export const metadata = {
-  title: `${terms.title} | Herracol S.A.`,
-  description:
-    "Revisa nuestros Términos y Condiciones para entender cómo funcionan nuestros servicios y qué puedes esperar de nosotros. Nos comprometemos a mantener un entorno seguro y transparente para nuestros usuarios.",
-  openGraph: {
-    title: `${terms.title} | Herracol S.A.`,
-    description:
-      "Revisa nuestros Términos y Condiciones para entender cómo funcionan nuestros servicios y qué puedes esperar de nosotros. Nos comprometemos a mantener un entorno seguro y transparente para nuestros usuarios.",
-    url: "https://herracol.net/terminos-y-condiciones",
-  },
-  alternates: {
-    canonical: "https://herracol.net/terminos-y-condiciones",
-  },
-};
-
-export default function TermsOfUse() {
-  return (
-    <section className="pt-[50px] px-[4%] max-w-[1280px] mx-auto">
-      <h2 class="mb-8 text-3xl font-bold">{terms.title}</h2>
-      {terms.items.map((item) => {
-        return (
-          <>
-            <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
-            <p className="mb-6 text-justify">{item.paragraph}</p>
-          </>
-        );
-      })}
-      <p class="mb-6">{terms.date}</p>
-    </section>
-  );
-}
-
 const terms = {
   title: "Términos y Condiciones de Uso",
   items: [
@@ -61,3 +29,35 @@ const terms = {
   ],
   date: "Fecha de la última actualización: 28/05/2023",
 };
+
+export const metadata = {
+  title: `${terms.title} | Herracol S.A.`,
+  description:
+    "Revisa nuestros Términos y Condiciones para entender cómo funcionan nuestros servicios y qué puedes esperar de nosotros. Nos comprometemos a mantener un entorno seguro y transparente para nuestros usuarios.",
+  openGraph: {
+    title: `${terms.title} | Herracol S.A.`,
+    description:
+      "Revisa nuestros Términos y Condiciones para entender cómo funcionan nuestros servicios y qué puedes esperar de nosotros. Nos comprometemos a mantener un entorno seguro y transparente para nuestros usuarios.",
+    url: "https://herracol.net/terminos-y-condiciones",
+  },
+  alternates: {
+    canonical: "https://herracol.net/terminos-y-condiciones",
+  },
+};
+
+export default function TermsOfUse() {
+  return (
+    <section className="pt-[50px] px-[4%] max-w-[1280px] mx-auto">
+      <h2 class="mb-8 text-3xl font-bold">{terms.title}</h2>
+      {terms.items.map((item) => {
+        return (
+          <>
+            <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
+            <p className="mb-6 text-justify">{item.paragraph}</p>
+          </>
+        );
+      })}
+      <p class="mb-6">{terms.date}</p>
+    </section>
+  );
+}
