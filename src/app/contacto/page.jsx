@@ -1,13 +1,37 @@
+export const metadata = {
+  title: `Contacto | Herracol S.A.`,
+  description:
+    "¿Tienes preguntas o necesitas ayuda con nuestros productos o servicios? Contáctanos o ven a visitarnos. Encuentra aquí toda nuestra información de contacto, la ubicación de nuestra empresa en Google Maps y un conveniente formulario para hacer tu consulta directamente. Estamos aquí para ayudarte.",
+  openGraph: {
+    title: `Contacto | Herracol S.A.`,
+    description:
+      "¿Tienes preguntas o necesitas ayuda con nuestros productos o servicios? Contáctanos o ven a visitarnos. Encuentra aquí toda nuestra información de contacto, la ubicación de nuestra empresa en Google Maps y un conveniente formulario para hacer tu consulta directamente. Estamos aquí para ayudarte.",
+    url: "https://herracol.net/contacto",
+  },
+  alternates: {
+    canonical: "https://herracol.net/contacto",
+  },
+};
+
 import Map from "@/components/Map";
 import Input from "@/components/Input";
 import Textarea from "@/components/Textarea";
 import Image from "next/image";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import Head from "next/head";
 
 export default function Contact() {
   return (
     <>
+      <Head>
+        <title>Contacto | Herracol S.A.</title>
+        <meta
+          name="description"
+          content="¿Tienes preguntas o necesitas ayuda con nuestros productos o servicios? Contáctanos o ven a visitarnos. Encuentra aquí toda nuestra información de contacto, la ubicación de nuestra empresa en Google Maps y un conveniente formulario para hacer tu consulta directamente. Estamos aquí para ayudarte."
+        />
+        <link rel="canonical" href="https://herracol.net/contacto" />
+      </Head>
       <section className="h-full">
         <Map src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3987.148069725225!2d-79.937145!3d-2.096338!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d0d416a07ba3f%3A0x343b7937a49a3d51!2sParque%20california%202%20bodegas!5e0!3m2!1ses!2sec!4v1684454482402!5m2!1ses!2sec" />
         <div className="grid gap-8 px-[4%] py-10 w-full md:grid-cols-contact md:items-start">

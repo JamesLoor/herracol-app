@@ -35,10 +35,12 @@ export default function Product({
             <Button className="!px-5 text-sm" onClick={handleClicked}>
               Ver más
             </Button>
-            <span className="text-xs capitalize">
-              <span className="uppercase">cod: </span>
-              {code}
-            </span>
+            {!infoCode && (
+              <span className="text-xs capitalize">
+                <span className="uppercase">cod: </span>
+                {code}
+              </span>
+            )}
           </div>
         </div>
       </li>
@@ -53,10 +55,11 @@ export default function Product({
             {category[0].label}
           </Modal.Header>
           <Modal.Body>
-            <div className="md:grid md:grid-cols-modalContentContainer gap-4">
-              <figure className="border border-secundaryLight w-full min-h-[200px] max-h-[300px] grid place-items-center">
-                <img
-                  className="w-full h-full object-contain block"
+            <div className="grid md:grid-cols-modalContentContainer gap-4">
+              <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secundaryLight w-full">
+                <Image
+                  fill="responsive"
+                  className="object-contain"
                   src={image}
                   alt={name}
                 />
@@ -110,12 +113,11 @@ export default function Product({
               className="bg-whatsapp flex items-center gap-2 text-white !px-5"
               onClick={() => {
                 const phone = "593983245586";
-                const message = `Hola, estoy interesado en el siguiente producto
-    *${name}*
-    Categoría: ${category.map((cat) => cat.label).join(", ")}
-    Código: ${code}
-    Marca: ${brand}
-    Imagen: ${image}`;
+                const message = `Hola, estoy interesado en el siguiente producto\n*${name}*\nCategoría: ${category
+                  .map((cat) => cat.label)
+                  .join(
+                    ", "
+                  )}\nCódigo: ${code}\nMarca: ${brand}\nImagen: ${image}`;
                 const url = `https://wa.me/${phone}?text=${encodeURI(message)}`;
                 window.open(url, "_blank");
               }}

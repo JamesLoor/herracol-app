@@ -1,3 +1,18 @@
+export const metadata = {
+  title: `${terms.title} | Herracol S.A.`,
+  description:
+    "Revisa nuestros Términos y Condiciones para entender cómo funcionan nuestros servicios y qué puedes esperar de nosotros. Nos comprometemos a mantener un entorno seguro y transparente para nuestros usuarios.",
+  openGraph: {
+    title: `${terms.title} | Herracol S.A.`,
+    description:
+      "Revisa nuestros Términos y Condiciones para entender cómo funcionan nuestros servicios y qué puedes esperar de nosotros. Nos comprometemos a mantener un entorno seguro y transparente para nuestros usuarios.",
+    url: "https://herracol.net/terminos-y-condiciones",
+  },
+  alternates: {
+    canonical: "https://herracol.net/terminos-y-condiciones",
+  },
+};
+
 export default function TermsOfUse() {
   return (
     <section className="pt-[50px] px-[4%] max-w-[1280px] mx-auto">
