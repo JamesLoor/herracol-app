@@ -75,6 +75,10 @@ export default function SlideSection({
         scrollbar={{ draggable: true }}
         spaceBetween={30}
         slidesPerView={1}
+        loop
+        autoplay={{
+          delay: 5000,
+        }}
         mousewheel={false}
         className={`h-[300px] sm:h-[500px] md:h-[700px] ${
           direction === "right" ? "sm:-order-1" : ""
