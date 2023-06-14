@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -75,7 +76,6 @@ export default function SlideSection({
         scrollbar={{ draggable: true }}
         spaceBetween={30}
         slidesPerView={1}
-        loop
         autoplay={{
           delay: 5000,
         }}
@@ -87,9 +87,7 @@ export default function SlideSection({
         {images.map(({ key, image, alt }, index) => {
           return (
             <SwiperSlide key={key} virtualIndex={index}>
-              <Image
-                width={1200}
-                height={1200}
+              <img
                 alt={alt}
                 src={image}
                 className="w-full h-full object-cover select-none"
