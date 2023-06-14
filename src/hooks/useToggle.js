@@ -6,5 +6,5 @@ export function useToggle() {
     setClicked(!clicked);
   };
 
-  return { clicked, handleClicked };
+  return [clicked, handleClicked];
 }
