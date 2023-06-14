@@ -151,42 +151,42 @@ const slides = [
     images: [
       {
         key: "puertas-1",
-        image: "/assets/obras/Puertas/puertas-1.jpg",
+        image: "/assets/obras/Puertas/puertas1.jpg",
         alt: "puertas-1",
       },
       {
         key: "puertas-2",
-        image: "/assets/obras/Puertas/puertas-2.jpg",
+        image: "/assets/obras/Puertas/puertas2.jpg",
         alt: "puertas-2",
       },
       {
         key: "puertas-3",
-        image: "/assets/obras/Puertas/puertas-3.jpg",
+        image: "/assets/obras/Puertas/puertas3.jpg",
         alt: "puertas-3",
       },
       {
         key: "puertas-4",
-        image: "/assets/obras/Puertas/puertas-4.jpg",
+        image: "/assets/obras/Puertas/puertas4.jpg",
         alt: "puertas-4",
       },
       {
         key: "puertas-5",
-        image: "/assets/obras/Puertas/puertas-5.jpg",
+        image: "/assets/obras/Puertas/puertas5.jpg",
         alt: "puertas-5",
       },
       {
         key: "puertas-6",
-        image: "/assets/obras/Puertas/puertas-6.jpg",
+        image: "/assets/obras/Puertas/puertas6.jpg",
         alt: "puertas-6",
       },
       {
         key: "puertas-7",
-        image: "/assets/obras/Puertas/puertas-7.jpg",
+        image: "/assets/obras/Puertas/puertas7.jpg",
         alt: "puertas-7",
       },
       {
         key: "puertas-8",
-        image: "/assets/obras/Puertas/puertas-8.jpg",
+        image: "/assets/obras/Puertas/puertas8.jpg",
         alt: "puertas-8",
       },
     ],
