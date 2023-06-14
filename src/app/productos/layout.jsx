@@ -9,7 +9,7 @@ import Search from "@/components/Search";
 import Head from "next/head";
 
 export default function ProductsLayout({ children }) {
-  const { clicked, handleClicked } = useToggle();
+  const [clicked, handleClicked] = useToggle();
   const { products, setProducts, counter, setCounter } =
     useContext(ProductsContext);
 

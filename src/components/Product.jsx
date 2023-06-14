@@ -14,7 +14,7 @@ export default function Product({
   infoCode,
   links,
 }) {
-  const { clicked, handleClicked } = useToggle();
+  const [clicked, handleClicked] = useToggle();
   return (
     <>
       <li className="grid gap-2 grid-rows-productsCard">
