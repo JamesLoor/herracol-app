@@ -265,17 +265,17 @@ const slides = [
     images: [
       {
         key: "banos-1",
-        image: "/assets/obras/Banos/banos-1.jpg",
+        image: "/assets/obras/Banos/banos1.jpg",
         alt: "banos-1",
       },
       {
         key: "banos-2",
-        image: "/assets/obras/Banos/banos-2.jpg",
+        image: "/assets/obras/Banos/banos2.jpg",
         alt: "banos-2",
       },
       {
         key: "banos-3",
-        image: "/assets/obras/Banos/banos-3.jpg",
+        image: "/assets/obras/Banos/banos3.jpg",
         alt: "banos-3",
       },
     ],
