@@ -199,42 +199,42 @@ const slides = [
     images: [
       {
         key: "ventanas-1",
-        image: "/assets/obras/Ventanas/ventanas-1.jpg",
+        image: "/assets/obras/Ventanas/ventanas1.jpg",
         alt: "ventanas-1",
       },
       {
         key: "ventanas-2",
-        image: "/assets/obras/Ventanas/ventanas-2.jpg",
+        image: "/assets/obras/Ventanas/ventanas2.jpg",
         alt: "ventanas-2",
       },
       {
         key: "ventanas-3",
-        image: "/assets/obras/Ventanas/ventanas-3.jpg",
+        image: "/assets/obras/Ventanas/ventanas3.jpg",
         alt: "ventanas-3",
       },
       {
         key: "ventanas-4",
-        image: "/assets/obras/Ventanas/ventanas-4.jpg",
+        image: "/assets/obras/Ventanas/ventanas4.jpg",
         alt: "ventanas-4",
       },
       {
         key: "ventanas-5",
-        image: "/assets/obras/Ventanas/ventanas-5.jpg",
+        image: "/assets/obras/Ventanas/ventanas5.jpg",
         alt: "ventanas-5",
       },
       {
         key: "ventanas-6",
-        image: "/assets/obras/Ventanas/ventanas-6.jpg",
+        image: "/assets/obras/Ventanas/ventanas6.jpg",
         alt: "ventanas-6",
       },
       {
         key: "ventanas-7",
-        image: "/assets/obras/Ventanas/ventanas-7.jpg",
+        image: "/assets/obras/Ventanas/ventanas7.jpg",
         alt: "ventanas-7",
       },
       {
         key: "ventanas-8",
-        image: "/assets/obras/Ventanas/ventanas-8.jpg",
+        image: "/assets/obras/Ventanas/ventanas8.jpg",
         alt: "ventanas-8",
       },
     ],
