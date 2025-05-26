@@ -3,9 +3,10 @@
 import Product from "@/components/Product";
 import { ProductsContext } from "@/context/products";
 import { Spinner } from "flowbite-react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, use } from "react";
 
-export default function Page({ params }) {
+export default function Page(props) {
+  const params = use(props.params);
   const { category } = params;
   const { products, setCounter, searchValue } = useContext(ProductsContext);
 
