@@ -47,17 +47,20 @@ const policy = {
 
 export const metadata = {
   title: `${policy.title} | Herracol S.A.`,
+
   description:
     "Tu privacidad es importante para nosotros. Descubre cómo recogemos, usamos y protegemos tu información personal en nuestra Política de Privacidad. Estamos comprometidos con la transparencia y la seguridad de tus datos.",
+
   openGraph: {
     title: `${policy.title} | Herracol S.A.`,
     description:
       "Tu privacidad es importante para nosotros. Descubre cómo recogemos, usamos y protegemos tu información personal en nuestra Política de Privacidad. Estamos comprometidos con la transparencia y la seguridad de tus datos.",
     url: "https://herracol.net/politicas-de-privacidad",
   },
+
   alternates: {
     canonical: "https://herracol.net/politicas-de-privacidad",
-  },
+  }
 };
 
 export default function PolicyOfPrivacy() {

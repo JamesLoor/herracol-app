@@ -1,16 +1,19 @@
 export const metadata = {
   title: `Contacto | Herracol S.A.`,
+
   description:
     "¿Tienes preguntas o necesitas ayuda con nuestros productos o servicios? Contáctanos o ven a visitarnos. Encuentra aquí toda nuestra información de contacto, la ubicación de nuestra empresa en Google Maps y un conveniente formulario para hacer tu consulta directamente. Estamos aquí para ayudarte.",
+
   openGraph: {
     title: `Contacto | Herracol S.A.`,
     description:
       "¿Tienes preguntas o necesitas ayuda con nuestros productos o servicios? Contáctanos o ven a visitarnos. Encuentra aquí toda nuestra información de contacto, la ubicación de nuestra empresa en Google Maps y un conveniente formulario para hacer tu consulta directamente. Estamos aquí para ayudarte.",
     url: "https://herracol.net/contacto",
   },
+
   alternates: {
     canonical: "https://herracol.net/contacto",
-  },
+  }
 };
 
 import Map from "@/components/Map";
