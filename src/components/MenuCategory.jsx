@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import MenuCategoryItem from "./MenuCategoryItem";
 import { ProductsContext } from "@/context/products";
+import Image from "next/image";
 import { useContext } from "react";
+import MenuCategoryItem from "./MenuCategoryItem";
 
 export default function MenuCategory({ clicked, onClose }) {
   const { products } = useContext(ProductsContext);
@@ -16,7 +16,7 @@ export default function MenuCategory({ clicked, onClose }) {
     <nav
       className={`${
         clicked ? "block" : "hidden"
-      } fixed bg-primary p-5 h-[calc(100vh-69px)] md:h-[calc(100vh-69px-40px)] overflow-y-scroll scrollbar-thin scrollbar-thumb-accent left-0 top-0 right-0 mt-[69px] md:mt-0 md:sticky md:w-auto md:block md:top-[109px]`}
+      } fixed bg-primary p-5 h-[calc(100vh-69px)] md:h-[calc(100vh-69px-40px)] overflow-y-scroll scrollbar-thin scrollbar-thumb-accent left-0 top-0 right-0 mt-[69px] md:mt-0 md:sticky md:w-auto md:block md:top-[109px] z-50`}
     >
       <button onClick={onClose} className="absolute top-3 right-4 md:hidden">
         <Image
