@@ -2,6 +2,10 @@ import { useToggle } from "@/hooks/useToggle";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "./Button";
+import Modal from "./Modal";
+import ModalContent from "./ModalContent";
+import ModalFooter from "./ModalFooter";
+import ModalHeader from "./ModalHeader";
 
 export default function Product({
   image,
@@ -43,63 +47,65 @@ export default function Product({
         </div>
       </li>
       {clicked && (
-        <div className="h-full!" onClose={handleClicked}>
-          <div className="capitalize">{category[0].label}</div>
-          <div>
-            <div className="grid md:grid-cols-[var(--grid-modal-content-container)] gap-4">
-              <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secondary-light w-full">
-                <Image
-                  fill="responsive"
-                  className="object-contain"
-                  src={image}
-                  alt={name}
-                />
-              </figure>
-              <div className="grid auto-rows-max gap-2 self-center">
-                <h2 className="font-bold text-2xl">{name}</h2>
-                <div className="grid grid-cols-[var(--grid-modal-product-features)] justify-between">
-                  <span>Marca:</span>
-                  <span>{brand}</span>
-                  <span>Disponible</span>
-                  <span className="text-end text-whatsapp">✔</span>
-                </div>
-                {infoCode && (
-                  <div className="overflow-y-scroll max-h-32">
-                    {infoCode &&
-                      infoCode.map(({ info, code }) => {
-                        return (
-                          <div
-                            key={`${info}${code}`}
-                            className="grid grid-cols-[var(--grid-modal-product-features)] justify-between"
-                          >
-                            <span className="text-xs">{info}</span>
-                            <span className="text-xs">{code}</span>
-                          </div>
-                        );
-                      })}
-                  </div>
-                )}
-                {links && (
-                  <div className="">
-                    {links &&
-                      links.map((link, index) => {
-                        return (
-                          <Link
-                            key={index}
-                            href={link}
-                            target="_blank"
-                            className="text-link"
-                          >
-                            PDF
-                          </Link>
-                        );
-                      })}
-                  </div>
-                )}
+        <Modal
+          isOpen={clicked}
+          onClose={handleClicked}
+          className="md:h-auto overflow-y-hidden"
+        >
+          <ModalHeader title={category[0].label} onClose={handleClicked} />
+          <ModalContent className="md:grid-cols-[var(--grid-modal-content-container)] overflow-y-auto flex-1">
+            <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secondary-light w-full">
+              <Image
+                fill="responsive"
+                className="object-contain"
+                src={image}
+                alt={name}
+              />
+            </figure>
+            <div className="grid auto-rows-max gap-2 self-center">
+              <h2 className="font-bold text-2xl">{name}</h2>
+              <div className="grid grid-cols-[var(--grid-modal-product-features)] justify-between">
+                <span>Marca:</span>
+                <span>{brand}</span>
+                <span>Disponible</span>
+                <span className="text-end text-whatsapp">✔</span>
               </div>
+              {infoCode && (
+                <div className="overflow-y-scroll max-h-32">
+                  {infoCode &&
+                    infoCode.map(({ info, code }) => {
+                      return (
+                        <div
+                          key={`${info}${code}`}
+                          className="grid grid-cols-[var(--grid-modal-product-features)] justify-between"
+                        >
+                          <span className="text-xs">{info}</span>
+                          <span className="text-xs">{code}</span>
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
+              {links && (
+                <div className="">
+                  {links &&
+                    links.map((link, index) => {
+                      return (
+                        <Link
+                          key={index}
+                          href={link}
+                          target="_blank"
+                          className="text-link"
+                        >
+                          PDF
+                        </Link>
+                      );
+                    })}
+                </div>
+              )}
             </div>
-          </div>
-          <div className="place-self-center">
+          </ModalContent>
+          <ModalFooter className="place-self-center">
             <Button
               className="bg-whatsapp flex items-center gap-2 text-white px-5!"
               onClick={() => {
@@ -122,8 +128,8 @@ export default function Product({
               />
               <p>Reservar por Whatsapp</p>
             </Button>
-          </div>
-        </div>
+          </ModalFooter>
+        </Modal>
       )}
     </>
   );

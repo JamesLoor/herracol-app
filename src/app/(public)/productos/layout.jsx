@@ -1,17 +1,11 @@
 "use client";
 
-import MenuCategory from "@/components/MenuCategory";
-import Search from "@/components/Search";
 import { ProductsContext } from "@/context/products";
-import { useToggle } from "@/hooks/useToggle";
 import Head from "next/head";
-import Image from "next/image";
 import { useContext, useEffect } from "react";
 
 export default function ProductsLayout({ children }) {
-  const [clicked, handleClicked] = useToggle();
-  const { products, setProducts, counter, setCounter } =
-    useContext(ProductsContext);
+  const { products, setProducts, setCounter } = useContext(ProductsContext);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -60,36 +54,7 @@ export default function ProductsLayout({ children }) {
         <meta property="og:url" content="https://herracol.net/productos" />
         <link rel="canonical" href="https://herracol.net/productos" />
       </Head>
-      <section className="px-[4%] py-10 grid gap-3">
-        <div className="grid gap-6 md:grid-cols-[var(--grid-products-category)]">
-          <MenuCategory
-            clicked={clicked}
-            onClose={handleClicked}
-            categories={[]}
-          />
-          <div className="grid gap-5 auto-rows-max">
-            <div className="grid grid-cols-[var(--grid-products-filters)] md:grid-cols-[var(--grid-products-filters-md)] grid-rows-[max-content] gap-4 items-center">
-              <button onClick={handleClicked} className="md:hidden">
-                <Image
-                  src="/icons/menu-category.svg"
-                  width={25}
-                  height={25}
-                  alt="Menu category icon"
-                />
-              </button>
-              <span className="flex gap-1">
-                <span className="hidden md:block">Mostrando</span>
-                <span>
-                  {counter} de {products?.length}
-                </span>
-                <span className="hidden md:block">productos</span>
-              </span>
-              <Search />
-            </div>
-            {children}
-          </div>
-        </div>
-      </section>
+      <section className="px-[4%] py-10 grid gap-3">{children}</section>
     </>
   );
 }
