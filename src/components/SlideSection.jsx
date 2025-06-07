@@ -35,7 +35,7 @@ export default function SlideSection({
 
             <div className="h-full grid auto-cols-max grid-flow-col gap-3">
               <button
-                className={`${`${slideKey}-button-prev`} bg-accent !static !w-[50px] !h-[50px] !m-0 rounded-full flex items-center justify-center disabled:opacity-75`}
+                className={`${`${slideKey}-button-prev`} bg-accent static! w-[50px]! h-[50px]! m-0! rounded-full flex items-center justify-center disabled:opacity-75`}
               >
                 <Image
                   width={17}
@@ -46,7 +46,7 @@ export default function SlideSection({
               </button>
 
               <button
-                className={`${`${slideKey}-button-next`} bg-accent !static !w-[50px] !h-[50px] !m-0 rounded-full flex items-center justify-center disabled:opacity-75`}
+                className={`${`${slideKey}-button-next`} bg-accent static! w-[50px]! h-[50px]! m-0! rounded-full flex items-center justify-center disabled:opacity-75`}
               >
                 <Image
                   width={17}
@@ -58,7 +58,7 @@ export default function SlideSection({
             </div>
           </div>
           <div
-            className={`hidden sm:grid ${slideKey}-pagination !transform-none ${
+            className={`hidden sm:grid ${slideKey}-pagination transform-none! ${
               direction === "right" ? "sm:-order-1" : ""
             }`}
           ></div>

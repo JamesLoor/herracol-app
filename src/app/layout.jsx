@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider localization={mergedLocalization} afterSignOutUrl="/admin">
       <ProductsProvider>
         <html lang="es" className={lato.className}>
-          <body className="!overflow-visible">{children}</body>
+          <body className="overflow-visible!">{children}</body>
         </html>
       </ProductsProvider>
     </ClerkProvider>

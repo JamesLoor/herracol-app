@@ -11,7 +11,7 @@ export default function MenuCategoryItem({ route, category, target, onClose }) {
     <Link
       onClick={onClose}
       className={`flex justify-between items-center rounded-3xl px-5 py-2 capitalize group hover:bg-accent hover:text-black ease-in duration-200 ${
-        isActive ? "bg-accent text-black" : "bg-primaryDark text-white"
+        isActive ? "bg-accent text-black" : "bg-primary-dark text-white"
       }`}
       href={route}
       target={target}

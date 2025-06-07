@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="grid gap-10 px-[4%] py-10 md:grid-cols-4">
-      <div className="grid grid-rows-footer place-items-center">
+      <div className="grid grid-rows-[var(--grid-footer)] place-items-center">
         <Image
           src="/assets/footer-logo.png"
           width={188}

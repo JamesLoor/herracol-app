@@ -13,7 +13,7 @@ export default function Textarea({
       <textarea
         cols={cols}
         rows={rows}
-        className="w-full px-5 py-3 rounded-[20px] border-solid border-secundaryLight border resize-none overflow-hidden"
+        className="w-full px-5 py-3 rounded-[20px] border-solid border-secondary-light border resize-none overflow-hidden"
         name={name}
         onChange={onChange}
       />

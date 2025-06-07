@@ -1,12 +1,12 @@
 "use client";
 
 import MenuCategory from "@/components/MenuCategory";
-import { useToggle } from "@/hooks/useToggle";
-import { useContext, useEffect } from "react";
-import Image from "next/image";
-import { ProductsContext } from "@/context/products";
 import Search from "@/components/Search";
+import { ProductsContext } from "@/context/products";
+import { useToggle } from "@/hooks/useToggle";
 import Head from "next/head";
+import Image from "next/image";
+import { useContext, useEffect } from "react";
 
 export default function ProductsLayout({ children }) {
   const [clicked, handleClicked] = useToggle();
@@ -61,14 +61,14 @@ export default function ProductsLayout({ children }) {
         <link rel="canonical" href="https://herracol.net/productos" />
       </Head>
       <section className="px-[4%] py-10 grid gap-3">
-        <div className="grid gap-6 md:grid-cols-productsCategory">
+        <div className="grid gap-6 md:grid-cols-[var(--grid-products-category)]">
           <MenuCategory
             clicked={clicked}
             onClose={handleClicked}
             categories={[]}
           />
           <div className="grid gap-5 auto-rows-max">
-            <div className="grid grid-cols-productsFilters md:grid-cols-productsFiltersMd grid-rows-[max-content] gap-4 items-center">
+            <div className="grid grid-cols-[var(--grid-products-filters)] md:grid-cols-[var(--grid-products-filters-md)] grid-rows-[max-content] gap-4 items-center">
               <button onClick={handleClicked} className="md:hidden">
                 <Image
                   src="/icons/menu-category.svg"
