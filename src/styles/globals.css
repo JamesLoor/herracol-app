@@ -1,6 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #091254;
+  --color-primary-dark: #20166e;
+  --color-primary-light: #100d28;
+  --color-secondary-dark: #797979;
+  --color-secondary-light: #c4c4c4;
+  --color-accent: #e8dc00;
+  --color-link: #1101a6;
+  --color-white: #ffffff;
+  --color-black: #222931;
+  --color-error: #ff5252;
+  --color-whatsapp: #25d366;
+  --color-ok: #47c9a2;
+  --color-skeleton: #e3e3e3;
+
+  /* Grid Templates */
+  --grid-header: max-content max-content;
+  --grid-banner: 1.5fr 1fr;
+  --grid-contact: 1fr max-content;
+  --grid-contact-info: 250px 1fr;
+  --grid-products: repeat(auto-fill, minmax(215px, 1fr));
+  --grid-products-category: 265px 1fr;
+  --grid-products-filters: max-content max-content 1fr;
+  --grid-products-filters-md: max-content 1fr;
+  --grid-modal-product-features: max-content max-content;
+  --grid-modal-content-container: 300px 1fr;
+
+  /* Grid Rows */
+  --grid-footer: min-content min-content;
+  --grid-products-card: 250px 1fr;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;

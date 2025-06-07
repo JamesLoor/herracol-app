@@ -1,9 +1,8 @@
 "use client";
 
-import { useContext, useEffect } from "react";
-import { ProductsContext } from "@/context/products";
 import Product from "@/components/Product";
-import { Spinner } from "flowbite-react";
+import { ProductsContext } from "@/context/products";
+import { useContext, useEffect } from "react";
 
 export default function Products() {
   const { products, setCounter, searchValue } = useContext(ProductsContext);
@@ -20,11 +19,7 @@ export default function Products() {
   }, [productsToShow]);
 
   if (products?.length === 0) {
-    return (
-      <div className="w-full grid place-items-center">
-        <Spinner aria-label="Default status example" />
-      </div>
-    );
+    return <div className="w-full grid place-items-center">Cargando...</div>;
   }
 
   if (products.length > 0 && filteredBySearch.length === 0) {
@@ -32,7 +27,7 @@ export default function Products() {
   }
 
   return (
-    <ul className="grid grid-cols-products gap-6">
+    <ul className="grid grid-cols-[var(--grid-products)] gap-6">
       {productsToShow?.map((product) => {
         return <Product key={product.id} {...product} />;
       })}

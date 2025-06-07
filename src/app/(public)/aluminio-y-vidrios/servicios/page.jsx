@@ -5,7 +5,7 @@ export default function Services() {
     <>
       <section
         id="services"
-        className="grid gap-8 items-center w-full px-[4%] mx-[auto] py-10 md:grid-cols-2"
+        className="grid gap-8 items-center w-full px-[4%] mx-auto py-10 md:grid-cols-2"
       >
         <div className="grid order-2 gap-4 md:gap-6 ">
           <h2 className="text-2xl lg:text-4xl font-bold">{services.title}</h2>

@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <section
         id="banner"
-        className="grid gap-8 items-center min-h-[calc(100vh-69px)] w-full px-[4%] mx-[auto] py-10 md:grid-cols-banner"
+        className="grid gap-8 items-center min-h-[calc(100vh-69px)] w-full px-[4%] mx-auto py-10 md:grid-cols-[var(--grid-banner)]"
       >
         <div className="grid order-2 gap-4 md:gap-6 md:order-1">
           <h1 className="text-3xl lg:text-5xl font-bold">{banner.title}</h1>

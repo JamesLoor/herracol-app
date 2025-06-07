@@ -1,10 +1,8 @@
-import { Modal } from "flowbite-react";
 import { useToggle } from "@/hooks/useToggle";
-import Button from "./Button";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import Button from "./Button";
 
-/* eslint-disable @next/next/no-img-element */
 export default function Product({
   image,
   name,
@@ -17,13 +15,13 @@ export default function Product({
   const [clicked, handleClicked] = useToggle();
   return (
     <>
-      <li className="grid gap-2 grid-rows-productsCard">
-        <figure className="border border-secundaryLight w-full h-full block overflow-hidden">
-          <img
-            className="w-full h-full object-contain hover:scale-125 ease-in duration-200"
+      <li className="grid gap-2 grid-rows-[var(--grid-products-card)]">
+        <figure className="border border-secondary-light w-full h-full block relative overflow-hidden">
+          <Image
             src={image}
             alt={name}
-            loading="lazy"
+            fill
+            className="object-contain hover:scale-125 ease-in duration-200"
           />
         </figure>
         <div className="grid gap-3 p-1">
@@ -32,7 +30,7 @@ export default function Product({
             <span className="text-xs capitalize">{brand}</span>
           </div>
           <div className="flex justify-between items-center">
-            <Button className="!px-5 text-sm" onClick={handleClicked}>
+            <Button className="px-5! text-sm" onClick={handleClicked}>
               Ver más
             </Button>
             {!infoCode && (
@@ -45,18 +43,11 @@ export default function Product({
         </div>
       </li>
       {clicked && (
-        <Modal
-          className="modalContainer !h-full"
-          size="4xl"
-          show={clicked}
-          onClose={handleClicked}
-        >
-          <Modal.Header className="capitalize">
-            {category[0].label}
-          </Modal.Header>
-          <Modal.Body>
-            <div className="grid md:grid-cols-modalContentContainer gap-4">
-              <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secundaryLight w-full">
+        <div className="h-full!" onClose={handleClicked}>
+          <div className="capitalize">{category[0].label}</div>
+          <div>
+            <div className="grid md:grid-cols-[var(--grid-modal-content-container)] gap-4">
+              <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secondary-light w-full">
                 <Image
                   fill="responsive"
                   className="object-contain"
@@ -66,7 +57,7 @@ export default function Product({
               </figure>
               <div className="grid auto-rows-max gap-2 self-center">
                 <h2 className="font-bold text-2xl">{name}</h2>
-                <div className="grid grid-cols-modalProductFeatures justify-between">
+                <div className="grid grid-cols-[var(--grid-modal-product-features)] justify-between">
                   <span>Marca:</span>
                   <span>{brand}</span>
                   <span>Disponible</span>
@@ -79,7 +70,7 @@ export default function Product({
                         return (
                           <div
                             key={`${info}${code}`}
-                            className="grid grid-cols-modalProductFeatures justify-between"
+                            className="grid grid-cols-[var(--grid-modal-product-features)] justify-between"
                           >
                             <span className="text-xs">{info}</span>
                             <span className="text-xs">{code}</span>
@@ -107,10 +98,10 @@ export default function Product({
                 )}
               </div>
             </div>
-          </Modal.Body>
-          <Modal.Footer className="place-self-center">
+          </div>
+          <div className="place-self-center">
             <Button
-              className="bg-whatsapp flex items-center gap-2 text-white !px-5"
+              className="bg-whatsapp flex items-center gap-2 text-white px-5!"
               onClick={() => {
                 const phone = "593983245586";
                 const message = `Hola, estoy interesado en el siguiente producto\n*${name}*\nCategoría: ${category
@@ -131,8 +122,8 @@ export default function Product({
               />
               <p>Reservar por Whatsapp</p>
             </Button>
-          </Modal.Footer>
-        </Modal>
+          </div>
+        </div>
       )}
     </>
   );

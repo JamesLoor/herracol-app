@@ -2,11 +2,11 @@
 
 import { useToggle } from "@/hooks/useToggle";
 import Image from "next/image";
-import NavItem from "./NavItem";
 import Link from "next/link";
-import Dropdown from "./Dropdown";
 import { usePathname } from "next/navigation";
+import Dropdown from "./Dropdown";
 import DropdownItem from "./DropdownItem";
+import NavItem from "./NavItem";
 
 export default function Navigation() {
   const [isOpenMenu, toggleMenu] = useToggle();
@@ -14,7 +14,7 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed z-40 w-full grid grid-cols-header justify-between items-center px-[4%] bg-primary min-h-[69px]">
+    <header className="fixed z-40 w-full grid grid-cols-[var(--grid-header)] justify-between items-center px-[4%] bg-primary min-h-[69px]">
       <Link href="/">
         <Image
           width={225}
@@ -68,7 +68,7 @@ export default function Navigation() {
                     return (
                       <DropdownItem
                         key={item.key}
-                        className="hover:bg-primaryDark"
+                        className="hover:bg-primary-dark"
                         onClick={() => {
                           toggleDropdown();
                           toggleMenu();
