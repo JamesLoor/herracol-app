@@ -50,7 +50,7 @@ export default function Product({
         <Modal
           isOpen={clicked}
           onClose={handleClicked}
-          className="md:h-auto overflow-y-hidden"
+          className="md:h-auto lg:max-w-4xl overflow-y-hidden"
         >
           <ModalHeader title={category[0].label} onClose={handleClicked} />
           <ModalContent className="md:grid-cols-[var(--grid-modal-content-container)] overflow-y-auto flex-1">
