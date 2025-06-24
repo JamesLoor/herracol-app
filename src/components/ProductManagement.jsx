@@ -1,7 +1,28 @@
+"use client";
+
 import { ChevronDown, Funnel, Plus, Search } from "lucide-react";
+import { useContext, useState } from "react";
+import { ProductsContext } from "../context/products";
 import ProductTable from "./ProductTable";
 
 export default function ProductManagement() {
+  const { products } = useContext(ProductsContext);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const categories = products.map((product) => product.category).flat();
+  const uniqueCategories = [...new Set(categories)];
+
+  const filteredProducts = products.filter((product) => {
+    if (selectedCategory === "all") {
+      return product;
+    }
+    return product.category.includes(selectedCategory);
+  });
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
   return (
     <div className="grid gap-4 md:gap-6">
       <div className="flex justify-between items-center">
@@ -58,37 +79,21 @@ export default function ProductManagement() {
             <select
               className="w-full h-full p-2 pl-10 border border-gray-300 rounded-md cursor-pointer appearance-none"
               name="category"
+              onChange={handleCategoryChange}
+              value={selectedCategory}
             >
-              {categorieOptions.map((option) => (
-                <option key={option.key} value={option.key}>
-                  {option.label}
+              <option value="all">Todas las categorías</option>
+              {uniqueCategories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
                 </option>
               ))}
             </select>
           </label>
         </div>
 
-        <ProductTable />
+        <ProductTable products={filteredProducts} />
       </div>
     </div>
   );
 }
-
-const categorieOptions = [
-  {
-    label: "Herramientas",
-    key: "herramientas",
-  },
-  {
-    label: "Maquinarias",
-    key: "maquinarias",
-  },
-  {
-    label: "Accesorios",
-    key: "accesorios",
-  },
-  {
-    label: "Repuestos",
-    key: "repuestos",
-  },
-];
