@@ -1,8 +1,9 @@
-import "@/styles/globals.css";
-import { Lato } from "next/font/google";
 import { ProductsProvider } from "@/context/products";
-import { ClerkProvider } from "@clerk/nextjs";
+import { getProducts } from "@/sevices/product";
 import { esMX } from "@clerk/localizations";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Lato } from "next/font/google";
+import "./globals.css";
 
 const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700", "900"] });
 
@@ -53,10 +54,11 @@ const localization = {
 
 const mergedLocalization = { ...esMX, ...localization };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const products = await getProducts();
   return (
     <ClerkProvider localization={mergedLocalization} afterSignOutUrl="/admin">
-      <ProductsProvider>
+      <ProductsProvider initialProducts={products}>
         <html lang="es" className={lato.className}>
           <body className="overflow-visible!">{children}</body>
         </html>
