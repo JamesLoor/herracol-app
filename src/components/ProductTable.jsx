@@ -1,12 +1,7 @@
-"use client";
-
-import { ProductsContext } from "@/context/products";
-import { useContext } from "react";
 import ProductTableHeaderCell from "./ProductTableHeaderCell";
 import ProductTableRow from "./ProductTableRow";
 
-export default function ProductTable() {
-  const { products } = useContext(ProductsContext);
+export default function ProductTable({ products }) {
   return (
     <div className="overflow-x-auto border border-gray-200 rounded-md">
       <table className="w-full">
@@ -19,7 +14,7 @@ export default function ProductTable() {
         </thead>
 
         <tbody className="bg-white">
-          {products.map((product) => (
+          {products?.map((product) => (
             <ProductTableRow key={product.id} product={product} />
           ))}
         </tbody>

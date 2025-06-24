@@ -1,3 +1,4 @@
+import { Chip } from "@heroui/react";
 import { SquarePen, Trash2 } from "lucide-react";
 import Image from "next/image";
 
@@ -31,9 +32,9 @@ export default function ProductTableRow({
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex flex-wrap gap-1">
           {product.category.map((category, index) => (
-            <span key={index} variant="secondary" className="text-xs">
+            <Chip key={index} color="secondary" className="text-xs">
               {category}
-            </span>
+            </Chip>
           ))}
         </div>
       </td>
