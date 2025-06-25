@@ -25,7 +25,7 @@ export default function AdminSidebarItem({ label, href, icon, isDisabled }) {
           {label}
         </div>
       ) : (
-        <Link className="flex items-center gap-2" href={href}>
+        <Link className="flex items-center gap-2 w-full" href={href}>
           {icon}
           {label}
         </Link>
