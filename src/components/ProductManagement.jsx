@@ -8,20 +8,31 @@ import ProductTable from "./ProductTable";
 export default function ProductManagement() {
   const { products } = useContext(ProductsContext);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [search, setSearch] = useState("");
 
   const categories = products.map((product) => product.category).flat();
   const uniqueCategories = [...new Set(categories)];
 
-  const filteredProducts = products.filter((product) => {
+  const ProductsByCategory = products.filter((product) => {
     if (selectedCategory === "all") {
       return product;
     }
     return product.category.includes(selectedCategory);
   });
 
+  const producstBySearch = products.filter((product) => {
+    return product.name.toLowerCase().includes(search.toLowerCase());
+  });
+
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
   };
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const productsToShow = search ? producstBySearch : ProductsByCategory;
 
   return (
     <div className="grid gap-4 md:gap-6">
@@ -61,6 +72,8 @@ export default function ProductManagement() {
               name="search"
               placeholder="Buscar productos..."
               className="border border-gray-300 rounded-md p-2 w-full pl-10"
+              onChange={handleSearchChange}
+              value={search}
             />
           </label>
 
@@ -92,7 +105,7 @@ export default function ProductManagement() {
           </label>
         </div>
 
-        <ProductTable products={filteredProducts} />
+        <ProductTable products={productsToShow} />
       </div>
     </div>
   );
