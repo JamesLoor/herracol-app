@@ -1,5 +1,5 @@
 import { ProductsProvider } from "@/context/products";
-import { getProducts } from "@/sevices/product";
+import { productService } from "@/sevices/product";
 import { esMX } from "@clerk/localizations";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Lato } from "next/font/google";
@@ -55,10 +55,20 @@ const localization = {
 const mergedLocalization = { ...esMX, ...localization };
 
 export default async function RootLayout({ children }) {
-  const products = await getProducts();
+  const products = await productService.getProducts();
+  const newProducts = products.map((product) => {
+    const newCategory = product.category.map((cat) => {
+      return cat.replaceAll("-", " ");
+    });
+
+    return {
+      ...product,
+      category: newCategory,
+    };
+  });
   return (
     <ClerkProvider localization={mergedLocalization} afterSignOutUrl="/admin">
-      <ProductsProvider initialProducts={products}>
+      <ProductsProvider initialProducts={newProducts}>
         <html lang="es" className={lato.className}>
           <body className="overflow-visible!">{children}</body>
         </html>

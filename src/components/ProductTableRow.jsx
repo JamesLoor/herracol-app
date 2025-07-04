@@ -22,17 +22,19 @@ export default function ProductTableRow({
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{product.name}</div>
+        <div className="text-sm font-medium text-gray-900 capitalize">
+          {product.name}
+        </div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-900">{product.brand}</div>
+        <div className="text-sm text-gray-900 capitalize">{product.brand}</div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex flex-wrap gap-1">
           {product.category.map((category, index) => (
-            <Chip key={index} color="secondary" className="text-xs">
+            <Chip key={index} color="secondary" className="text-xs capitalize">
               {category}
             </Chip>
           ))}
