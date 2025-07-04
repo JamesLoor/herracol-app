@@ -3,15 +3,14 @@
 import MenuCategory from "@/components/MenuCategory";
 import Product from "@/components/Product";
 import Search from "@/components/Search";
-import { ProductsContext } from "@/context/products";
+import { useProducts } from "@/context/products";
 import { useToggle } from "@/hooks/useToggle";
 import Image from "next/image";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function ProductList({ category }) {
   const [clicked, handleClicked] = useToggle();
-  const { products, counter, setCounter, searchValue } =
-    useContext(ProductsContext);
+  const { products, counter, setCounter, searchValue } = useProducts();
 
   const filteredProductsByCategory = category
     ? products?.filter((product) =>

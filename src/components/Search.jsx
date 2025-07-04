@@ -1,8 +1,7 @@
-import { ProductsContext } from "@/context/products";
-import { useContext } from "react";
+import { useProducts } from "@/context/products";
 
 export default function Search() {
-  const { searchValue, setSearchValue } = useContext(ProductsContext);
+  const { searchValue, setSearchValue } = useProducts();
 
   const handleChange = (event) => {
     setSearchValue(event.target.value);
