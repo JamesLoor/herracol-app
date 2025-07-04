@@ -1,11 +1,11 @@
 "use client";
 
-import { ProductsContext } from "@/context/products";
+import { useProducts } from "@/context/products";
 import Head from "next/head";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function ProductsLayout({ children }) {
-  const { products, setProducts, setCounter } = useContext(ProductsContext);
+  const { products, setProducts, setCounter } = useProducts();
 
   useEffect(() => {
     if (products.length === 0) {

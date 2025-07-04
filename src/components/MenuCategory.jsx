@@ -1,12 +1,11 @@
 "use client";
 
-import { ProductsContext } from "@/context/products";
+import { useProducts } from "@/context/products";
 import Image from "next/image";
-import { useContext } from "react";
 import MenuCategoryItem from "./MenuCategoryItem";
 
 export default function MenuCategory({ clicked, onClose }) {
-  const { products } = useContext(ProductsContext);
+  const { products } = useProducts();
 
   const categories = products?.map((product) => product.category).flat();
   const set = new Set(categories.map(JSON.stringify));

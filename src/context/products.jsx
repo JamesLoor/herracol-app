@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const ProductsContext = createContext();
+const ProductsContext = createContext();
 
 export function ProductsProvider({ children, initialProducts }) {
   const [products, setProducts] = useState(initialProducts);
@@ -24,3 +24,11 @@ export function ProductsProvider({ children, initialProducts }) {
     </ProductsContext.Provider>
   );
 }
+
+export const useProducts = () => {
+  const context = useContext(ProductsContext);
+  if (!context) {
+    throw new Error("useProducts must be used within a ProductsProvider");
+  }
+  return context;
+};
