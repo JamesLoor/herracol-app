@@ -1,43 +1,6 @@
-"use client";
-
-import { useProducts } from "@/context/products";
 import Head from "next/head";
-import { useEffect } from "react";
 
 export default function ProductsLayout({ children }) {
-  const { products, setProducts, setCounter } = useProducts();
-
-  useEffect(() => {
-    if (products.length === 0) {
-      fetch(
-        "https://herracol-api-8820d-default-rtdb.firebaseio.com/products.json"
-      )
-        .then((response) => response.json())
-        .then((productsList) => {
-          const categoriesToDelete = ["brocas", "martillos", "TEKBOND"];
-          const newProductsList = productsList?.map((product) => {
-            const categories = product.category.filter(
-              (category) => !categoriesToDelete.includes(category)
-            );
-            const newCategories = categories.map((category) => {
-              return {
-                label: category.toLowerCase().replaceAll("-", " "),
-                slug: category.toLowerCase(),
-              };
-            });
-
-            return {
-              ...product,
-              category: newCategories,
-            };
-          });
-          setProducts(newProductsList);
-          setCounter(newProductsList?.length);
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <>
       <Head key="products">
