@@ -46,91 +46,88 @@ export default function Product({
           </div>
         </div>
       </li>
-      {clicked && (
-        <Modal
-          isOpen={clicked}
-          onClose={handleClicked}
-          className="md:h-auto lg:max-w-4xl overflow-y-hidden"
-        >
-          <ModalHeader title={category[0].label} onClose={handleClicked} />
-          <ModalContent className="md:grid-cols-[var(--grid-modal-content-container)] overflow-y-auto flex-1">
-            <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secondary-light w-full">
-              <Image
-                fill="responsive"
-                className="object-contain"
-                src={image}
-                alt={name}
-              />
-            </figure>
-            <div className="grid auto-rows-max gap-2 self-center">
-              <h2 className="font-bold text-2xl">{name}</h2>
-              <div className="grid grid-cols-[var(--grid-modal-product-features)] justify-between">
-                <span>Marca:</span>
-                <span>{brand}</span>
-                <span>Disponible</span>
-                <span className="text-end text-whatsapp">✔</span>
-              </div>
-              {infoCode && (
-                <div className="overflow-y-scroll max-h-32">
-                  {infoCode &&
-                    infoCode.map(({ info, code }) => {
-                      return (
-                        <div
-                          key={`${info}${code}`}
-                          className="grid grid-cols-[var(--grid-modal-product-features)] justify-between"
-                        >
-                          <span className="text-xs">{info}</span>
-                          <span className="text-xs">{code}</span>
-                        </div>
-                      );
-                    })}
-                </div>
-              )}
-              {links && (
-                <div className="">
-                  {links &&
-                    links.map((link, index) => {
-                      return (
-                        <Link
-                          key={index}
-                          href={link}
-                          target="_blank"
-                          className="text-link"
-                        >
-                          PDF
-                        </Link>
-                      );
-                    })}
-                </div>
-              )}
+      <Modal
+        isOpen={clicked}
+        className="md:h-auto lg:max-w-4xl overflow-y-hidden"
+      >
+        <ModalHeader title={category[0].label} onClose={handleClicked} />
+        <ModalContent className="md:grid-cols-[var(--grid-modal-content-container)] overflow-y-auto flex-1">
+          <figure className="relative grid place-items-center min-h-[200px] md:min-h-[300px] border border-secondary-light w-full">
+            <Image
+              fill="responsive"
+              className="object-contain"
+              src={image}
+              alt={name}
+            />
+          </figure>
+          <div className="grid auto-rows-max gap-2 self-center">
+            <h2 className="font-bold text-2xl">{name}</h2>
+            <div className="grid grid-cols-[var(--grid-modal-product-features)] justify-between">
+              <span>Marca:</span>
+              <span>{brand}</span>
+              <span>Disponible</span>
+              <span className="text-end text-whatsapp">✔</span>
             </div>
-          </ModalContent>
-          <ModalFooter className="place-self-center">
-            <Button
-              className="bg-whatsapp flex items-center gap-2 text-white px-5!"
-              onClick={() => {
-                const phone = "593983245586";
-                const message = `Hola, estoy interesado en el siguiente producto\n*${name}*\nCategoría: ${category
-                  .map((cat) => cat.label)
-                  .join(
-                    ", "
-                  )}\nCódigo: ${code}\nMarca: ${brand}\nImagen: ${image}`;
-                const url = `https://wa.me/${phone}?text=${encodeURI(message)}`;
-                window.open(url, "_blank");
-              }}
-            >
-              <Image
-                className="invert"
-                width={25}
-                height={25}
-                src="/icons/whatsapp.svg"
-                alt="Whatsapp"
-              />
-              <p>Reservar por Whatsapp</p>
-            </Button>
-          </ModalFooter>
-        </Modal>
-      )}
+            {infoCode && (
+              <div className="overflow-y-scroll max-h-32">
+                {infoCode &&
+                  infoCode.map(({ info, code }) => {
+                    return (
+                      <div
+                        key={`${info}${code}`}
+                        className="grid grid-cols-[var(--grid-modal-product-features)] justify-between"
+                      >
+                        <span className="text-xs">{info}</span>
+                        <span className="text-xs">{code}</span>
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
+            {links && (
+              <div className="">
+                {links &&
+                  links.map((link, index) => {
+                    return (
+                      <Link
+                        key={index}
+                        href={link}
+                        target="_blank"
+                        className="text-link"
+                      >
+                        PDF
+                      </Link>
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+        </ModalContent>
+        <ModalFooter className="place-self-center">
+          <Button
+            className="bg-whatsapp flex items-center gap-2 text-white px-5!"
+            onClick={() => {
+              const phone = "593983245586";
+              const message = `Hola, estoy interesado en el siguiente producto\n*${name}*\nCategoría: ${category
+                .map((cat) => cat.label)
+                .join(
+                  ", "
+                )}\nCódigo: ${code}\nMarca: ${brand}\nImagen: ${image}`;
+              const url = `https://wa.me/${phone}?text=${encodeURI(message)}`;
+              window.open(url, "_blank");
+            }}
+          >
+            <Image
+              className="invert"
+              width={25}
+              height={25}
+              src="/icons/whatsapp.svg"
+              alt="Whatsapp"
+            />
+            <p>Reservar por Whatsapp</p>
+          </Button>
+        </ModalFooter>
+      </Modal>
     </>
   );
 }
