@@ -5,11 +5,7 @@ import Image from "next/image";
 import MenuCategoryItem from "./MenuCategoryItem";
 
 export default function MenuCategory({ clicked, onClose }) {
-  const { products } = useProducts();
-
-  const categories = products?.map((product) => product.category).flat();
-  const set = new Set(categories.map(JSON.stringify));
-  const categoriesWithoutDuplicates = Array.from(set).map(JSON.parse);
+  const { categories } = useProducts();
 
   return (
     <nav
@@ -35,7 +31,7 @@ export default function MenuCategory({ clicked, onClose }) {
               onClose={onClose}
             />
           </li>
-          {categoriesWithoutDuplicates?.map(({ label, slug }) => {
+          {categories?.map(({ label, slug }) => {
             return (
               <li key={slug}>
                 <MenuCategoryItem

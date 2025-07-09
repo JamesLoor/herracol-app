@@ -14,7 +14,9 @@ export default function ProductList({ category }) {
 
   const filteredProductsByCategory = category
     ? products?.filter((product) =>
-        product.category.some((cat) => cat.slug === category)
+        product.category.some(
+          (cat) => cat.slug.toLowerCase() === category.toLowerCase()
+        )
       )
     : products;
 
@@ -36,7 +38,7 @@ export default function ProductList({ category }) {
 
   return (
     <div className="grid gap-6 md:grid-cols-[var(--grid-products-category)]">
-      <MenuCategory clicked={clicked} onClose={handleClicked} categories={[]} />
+      <MenuCategory clicked={clicked} onClose={handleClicked} />
 
       <div className="grid gap-5 auto-rows-max">
         <div className="grid grid-cols-[var(--grid-products-filters)] md:grid-cols-[var(--grid-products-filters-md)] grid-rows-[max-content] gap-4 items-center">
