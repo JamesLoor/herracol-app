@@ -57,13 +57,16 @@ const mergedLocalization = { ...esMX, ...localization };
 export default async function RootLayout({ children }) {
   const products = await productService.getProducts();
   const newProducts = products.map((product) => {
-    const newCategory = product.category.map((cat) => {
-      return cat.replaceAll("-", " ");
+    const newCategories = product.category.map((category) => {
+      return {
+        label: category.toLowerCase().replaceAll("-", " "),
+        slug: category.toLowerCase(),
+      };
     });
 
     return {
       ...product,
-      category: newCategory,
+      category: newCategories,
     };
   });
   return (
