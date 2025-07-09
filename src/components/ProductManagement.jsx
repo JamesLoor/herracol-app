@@ -1,26 +1,31 @@
 "use client";
 
+import { useToggle } from "@/hooks/useToggle";
 import { ChevronDown, Funnel, Plus, Search } from "lucide-react";
-import { useContext, useState } from "react";
-import { ProductsContext } from "../context/products";
+import { useState } from "react";
+import { useProducts } from "../context/products";
+import Modal from "./Modal";
+import ModalHeader from "./ModalHeader";
+import ProductForm from "./ProductForm";
 import ProductTable from "./ProductTable";
 
 export default function ProductManagement() {
-  const { products } = useContext(ProductsContext);
+  const { products, categories } = useProducts();
+  const [isOpenModal, setIsOpenModal] = useToggle();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
 
-  const categories = products.map((product) => product.category).flat();
-  const uniqueCategories = [...new Set(categories)];
-
-  const ProductsByCategory = products.filter((product) => {
+  const ProductsByCategory = products?.filter((product) => {
     if (selectedCategory === "all") {
       return product;
     }
-    return product.category.includes(selectedCategory);
+    return product.category.some(
+      (category) =>
+        category.label.toLowerCase() === selectedCategory.toLowerCase()
+    );
   });
 
-  const producstBySearch = products.filter((product) => {
+  const producstBySearch = products?.filter((product) => {
     return product.name.toLowerCase().includes(search.toLowerCase());
   });
 
@@ -46,7 +51,10 @@ export default function ProductManagement() {
           </p>
         </div>
 
-        <button className="bg-gray-900 hover:bg-black transition-all duration-200 text-white text-xs md:text-base h-10 py-2 px-2 md:py-3 md:px-4 rounded-md flex items-center gap-2 cursor-pointer">
+        <button
+          onClick={setIsOpenModal}
+          className="bg-gray-900 hover:bg-black transition-all duration-200 text-white text-xs md:text-base h-10 py-2 px-2 md:py-3 md:px-4 rounded-md flex items-center gap-2 cursor-pointer"
+        >
           <Plus width={18} height={18} color="#fff" />
           Crear Producto
         </button>
@@ -90,15 +98,15 @@ export default function ProductManagement() {
               className="absolute top-1/2 right-2 -translate-y-1/2 pointer-events-none"
             />
             <select
-              className="w-full h-full p-2 pl-10 border border-gray-300 rounded-md cursor-pointer appearance-none"
+              className="w-full h-full p-2 pl-10 border border-gray-300 rounded-md cursor-pointer appearance-none capitalize"
               name="category"
               onChange={handleCategoryChange}
               value={selectedCategory}
             >
               <option value="all">Todas las categorías</option>
-              {uniqueCategories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
+              {categories.map(({ label }) => (
+                <option key={label} value={label} className="capitalize">
+                  {label}
                 </option>
               ))}
             </select>
@@ -106,6 +114,17 @@ export default function ProductManagement() {
         </div>
 
         <ProductTable products={productsToShow} />
+
+        <Modal isOpen={isOpenModal} className="grid gap-4 p-6 md:max-w-[600px]">
+          <ModalHeader
+            title="Crear Nuevo Producto"
+            description="Completa la información del nuevo producto"
+            className="p-0!"
+            onClose={setIsOpenModal}
+          />
+
+          <ProductForm setIsOpen={setIsOpenModal} categories={categories} />
+        </Modal>
       </div>
     </div>
   );

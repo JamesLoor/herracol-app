@@ -6,7 +6,17 @@ const nextConfig = {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
       },
+      {
+        protocol: "https",
+        hostname: "vidres.ec",
+      },
     ],
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["vidres.ec"],
+      bodySizeLimit: "10mb",
+    },
   },
 };
 

@@ -33,9 +33,9 @@ export default function ProductTableRow({
 
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex flex-wrap gap-1">
-          {product.category.map((category, index) => (
-            <Chip key={index} color="secondary" className="text-xs capitalize">
-              {category}
+          {product.category.map(({ label, slug }) => (
+            <Chip key={slug} color="secondary" className="text-xs capitalize">
+              {label}
             </Chip>
           ))}
         </div>
