@@ -33,8 +33,14 @@ const uploadImage = async (image) => {
   return response.data.url;
 };
 
+const updateProduct = async (product, id) => {
+  const response = await axios.patch(`${url}/products/${id}.json`, product);
+  return response.data;
+};
+
 export const productService = {
   createProduct,
   uploadImage,
   getProducts,
+  updateProduct,
 };

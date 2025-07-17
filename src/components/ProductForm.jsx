@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useProducts } from "@/context/products";
@@ -5,16 +6,47 @@ import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { Check, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export default function ProductForm({ setIsOpen, categories }) {
+export default function ProductForm({
+  setIsOpen,
+  categories,
+  productToUpdate,
+}) {
   const [newCategory, setNewCategory] = useState("");
   const [categoriesMerged, setCategoriesMerged] = useState(
-    categories.map(({ label }) => label)
+    categories?.map(({ label }) => label)
   );
   const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [inputError, setInputError] = useState("");
+  const [formUpdateData, setFormUpdateData] = useState({
+    name: "",
+    brand: "",
+    code: "",
+    image: "",
+    sku: "",
+    information: "",
+  });
   const inputRef = useRef(null);
-  const { isLoading, createProduct, error } = useProducts();
+  const { isLoading, createProduct, error, updateProduct } = useProducts();
+
+  const productToUpdateCategories = productToUpdate?.category.map(
+    ({ label }) => label
+  );
+
+  useEffect(() => {
+    setCategoriesMerged(categories?.map(({ label }) => label));
+    if (productToUpdate) {
+      setSelectedCategories(new Set([...productToUpdateCategories]));
+      setFormUpdateData({
+        name: productToUpdate.name || "",
+        brand: productToUpdate.brand || "",
+        code: productToUpdate.code || "",
+        image: productToUpdate.image || "",
+        sku: productToUpdate.sku || "",
+        information: productToUpdate.information || "",
+      });
+    }
+  }, [categories, productToUpdate]);
 
   useEffect(() => {
     if (isCreatingNewCategory && inputRef.current) {
@@ -62,6 +94,16 @@ export default function ProductForm({ setIsOpen, categories }) {
     setIsCreatingNewCategory(false);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormUpdateData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormUpdateData((prev) => ({ ...prev, image: file }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -69,7 +111,11 @@ export default function ProductForm({ setIsOpen, categories }) {
     const newCategories = Array.from(selectedCategories);
 
     try {
-      await createProduct(formData, newCategories);
+      if (productToUpdate) {
+        await updateProduct(formUpdateData, newCategories, productToUpdate.id);
+      } else {
+        await createProduct(formData, newCategories);
+      }
 
       e.target.reset();
       setIsCreatingNewCategory(false);
@@ -87,6 +133,8 @@ export default function ProductForm({ setIsOpen, categories }) {
           label="Nombre"
           variant="bordered"
           radius="sm"
+          value={formUpdateData.name || ""}
+          onChange={handleInputChange}
           isRequired
         />
         <Input
@@ -94,6 +142,8 @@ export default function ProductForm({ setIsOpen, categories }) {
           label="Marca"
           variant="bordered"
           radius="sm"
+          value={formUpdateData.brand || ""}
+          onChange={handleInputChange}
           isRequired
         />
       </div>
@@ -103,7 +153,9 @@ export default function ProductForm({ setIsOpen, categories }) {
         label="Código"
         variant="bordered"
         radius="sm"
+        value={formUpdateData.code || ""}
         isRequired
+        onChange={handleInputChange}
       />
 
       <div className="flex flex-col gap-4">
@@ -121,7 +173,7 @@ export default function ProductForm({ setIsOpen, categories }) {
             onSelectionChange={setSelectedCategories}
             isRequired
           >
-            {categoriesMerged.map((category) => (
+            {categoriesMerged?.map((category) => (
               <SelectItem
                 key={category}
                 value={category}
@@ -202,19 +254,31 @@ export default function ProductForm({ setIsOpen, categories }) {
           classNames={{
             input: "file:mr-3",
           }}
-          isRequired
+          isRequired={!productToUpdate}
+          onChange={(e) => {
+            handleFileChange(e);
+          }}
         />
       </div>
 
       <div className="grid gap-2">
         <label className="font-semibold">Información Adicional</label>
         <div className="flex gap-3">
-          <Input name="sku" label="SKU" variant="bordered" radius="sm" />
+          <Input
+            name="sku"
+            label="SKU"
+            variant="bordered"
+            radius="sm"
+            value={formUpdateData.sku || ""}
+            onChange={handleInputChange}
+          />
           <Input
             name="information"
             label="Información"
             variant="bordered"
             radius="sm"
+            value={formUpdateData.information || ""}
+            onChange={handleInputChange}
           />
         </div>
       </div>
@@ -230,7 +294,7 @@ export default function ProductForm({ setIsOpen, categories }) {
           className="bg-gray-900 text-white"
           isLoading={isLoading}
         >
-          Crear Producto
+          {productToUpdate ? "Actualizar" : "Crear"}
         </Button>
       </div>
     </form>

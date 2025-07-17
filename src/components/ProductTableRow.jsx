@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function ProductTableRow({
   product,
-  onToggledModal,
+  onToggledUpdateModal,
   onToggledDeleteModal,
 }) {
   return (
@@ -48,14 +48,14 @@ export default function ProductTableRow({
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center justify-center space-x-2">
           <button
-            onClick={onToggledModal}
-            className="text-blue-600 hover:text-blue-800"
+            onClick={() => onToggledUpdateModal(product)}
+            className="text-blue-600 hover:text-blue-800 cursor-pointer"
           >
             <SquarePen width={18} height={18} />
           </button>
           <button
             onClick={onToggledDeleteModal}
-            className="text-red-600 hover:text-red-800"
+            className="text-red-600 hover:text-red-800 cursor-pointer"
           >
             <Trash2 width={18} height={18} />
           </button>

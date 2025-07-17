@@ -70,6 +70,33 @@ export function ProductsProvider({ children, initialProducts }) {
     }
   };
 
+  const updateProduct = async (formData, categories, productId) => {
+    setIsLoading(true);
+    try {
+      const newCategories = categories.map((cat) => {
+        return cat.toLowerCase().replaceAll(" ", "-");
+      });
+
+      if (formData.image instanceof File) {
+        const imageUrl = await productService.uploadImage(formData.image);
+        formData.image = imageUrl;
+      }
+
+      const product = {
+        ...formData,
+        category: newCategories,
+      };
+
+      await productService.updateProduct(product, productId);
+      await loadProducts();
+    } catch (error) {
+      setError("Error al actualizar el producto");
+      alert(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <ProductsContext.Provider
       value={{
@@ -84,6 +111,7 @@ export function ProductsProvider({ children, initialProducts }) {
         createProduct,
         loadProducts,
         categories,
+        updateProduct,
       }}
     >
       {children}
