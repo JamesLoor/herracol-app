@@ -21,7 +21,7 @@ export default function ProductTableRow({
         </div>
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-6 py-4 max-w-[300px]">
         <div className="text-sm font-medium text-gray-900 capitalize">
           {product.name}
         </div>
@@ -54,7 +54,7 @@ export default function ProductTableRow({
             <SquarePen width={18} height={18} />
           </button>
           <button
-            onClick={onToggledDeleteModal}
+            onClick={() => onToggledDeleteModal(product)}
             className="text-red-600 hover:text-red-800 cursor-pointer"
           >
             <Trash2 width={18} height={18} />

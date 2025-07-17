@@ -2,6 +2,7 @@
 
 import { useProducts } from "@/context/products";
 import { useToggle } from "@/hooks/useToggle";
+import { Button } from "@heroui/react";
 import { useState } from "react";
 import Modal from "./Modal";
 import ModalHeader from "./ModalHeader";
@@ -11,12 +12,24 @@ import ProductTableRow from "./ProductTableRow";
 
 export default function ProductTable({ products }) {
   const [isOpenModal, setIsOpenModal] = useToggle();
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useToggle();
   const [productToUpdate, setProductToUpdate] = useState(null);
-  const { categories } = useProducts();
+  const [productToDelete, setProductToDelete] = useState(null);
+  const { categories, deleteProduct } = useProducts();
 
   const handleToggledUpdateModal = (product) => {
     setIsOpenModal();
     setProductToUpdate(product);
+  };
+
+  const handleToggledDeleteModal = (product) => {
+    setIsOpenDeleteModal();
+    setProductToDelete(product);
+  };
+
+  const handleDeleteProduct = () => {
+    deleteProduct(productToDelete.id);
+    setIsOpenDeleteModal();
   };
 
   return (
@@ -37,6 +50,7 @@ export default function ProductTable({ products }) {
                 key={product.id}
                 product={product}
                 onToggledUpdateModal={handleToggledUpdateModal}
+                onToggledDeleteModal={handleToggledDeleteModal}
               />
             ))}
           </tbody>
@@ -56,6 +70,35 @@ export default function ProductTable({ products }) {
           categories={categories}
           productToUpdate={productToUpdate}
         />
+      </Modal>
+
+      <Modal
+        isOpen={isOpenDeleteModal}
+        className="grid gap-4 p-6 md:max-w-[600px]"
+      >
+        <ModalHeader
+          title="Eliminar Producto"
+          onClose={setIsOpenDeleteModal}
+          className="p-0!"
+        />
+        <div>
+          <p className="text-md text-gray-500">
+            {`Esta acción no se puede deshacer. Se eliminara el producto "${productToDelete?.name}"`}
+          </p>
+        </div>
+        <div className="flex justify-end gap-3">
+          <Button variant="bordered" radius="sm" onPress={setIsOpenDeleteModal}>
+            Cancelar
+          </Button>
+          <Button
+            variant="solid"
+            radius="sm"
+            color="danger"
+            onPress={handleDeleteProduct}
+          >
+            Eliminar
+          </Button>
+        </div>
       </Modal>
     </>
   );
