@@ -1,25 +1,63 @@
+"use client";
+
+import { useProducts } from "@/context/products";
+import { useToggle } from "@/hooks/useToggle";
+import { useState } from "react";
+import Modal from "./Modal";
+import ModalHeader from "./ModalHeader";
+import ProductForm from "./ProductForm";
 import ProductTableHeaderCell from "./ProductTableHeaderCell";
 import ProductTableRow from "./ProductTableRow";
 
 export default function ProductTable({ products }) {
-  return (
-    <div className="overflow-x-auto border border-gray-200 rounded-md">
-      <table className="w-full">
-        <thead className="border-b border-gray-200">
-          <tr>
-            {productTableLabels.map(({ key, name }) => (
-              <ProductTableHeaderCell key={key} label={name} />
-            ))}
-          </tr>
-        </thead>
+  const [isOpenModal, setIsOpenModal] = useToggle();
+  const [productToUpdate, setProductToUpdate] = useState(null);
+  const { categories } = useProducts();
 
-        <tbody className="bg-white">
-          {products?.map((product) => (
-            <ProductTableRow key={product.id} product={product} />
-          ))}
-        </tbody>
-      </table>
-    </div>
+  const handleToggledUpdateModal = (product) => {
+    setIsOpenModal();
+    setProductToUpdate(product);
+  };
+
+  return (
+    <>
+      <div className="overflow-x-auto border border-gray-200 rounded-md">
+        <table className="w-full">
+          <thead className="border-b border-gray-200">
+            <tr>
+              {productTableLabels.map(({ key, name }) => (
+                <ProductTableHeaderCell key={key} label={name} />
+              ))}
+            </tr>
+          </thead>
+
+          <tbody className="bg-white">
+            {products?.map((product) => (
+              <ProductTableRow
+                key={product.id}
+                product={product}
+                onToggledUpdateModal={handleToggledUpdateModal}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <Modal isOpen={isOpenModal} className="grid gap-4 p-6 md:max-w-[600px]">
+        <ModalHeader
+          title="Editar Producto"
+          description="Modifica la información del producto"
+          className="p-0!"
+          onClose={setIsOpenModal}
+        />
+
+        <ProductForm
+          setIsOpen={setIsOpenModal}
+          categories={categories}
+          productToUpdate={productToUpdate}
+        />
+      </Modal>
+    </>
   );
 }
 
