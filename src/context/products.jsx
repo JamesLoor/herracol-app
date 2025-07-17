@@ -97,6 +97,19 @@ export function ProductsProvider({ children, initialProducts }) {
     }
   };
 
+  const deleteProduct = async (productId) => {
+    setIsLoading(true);
+    try {
+      await productService.deleteProduct(productId);
+      await loadProducts();
+    } catch (error) {
+      setError("Error al eliminar el producto");
+      alert(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <ProductsContext.Provider
       value={{
@@ -112,6 +125,7 @@ export function ProductsProvider({ children, initialProducts }) {
         loadProducts,
         categories,
         updateProduct,
+        deleteProduct,
       }}
     >
       {children}

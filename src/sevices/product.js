@@ -38,9 +38,15 @@ const updateProduct = async (product, id) => {
   return response.data;
 };
 
+const deleteProduct = async (id) => {
+  const response = await axios.delete(`${url}/products/${id}.json`);
+  return response.data;
+};
+
 export const productService = {
   createProduct,
   uploadImage,
   getProducts,
   updateProduct,
+  deleteProduct,
 };
