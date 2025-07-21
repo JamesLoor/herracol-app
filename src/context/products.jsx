@@ -45,17 +45,16 @@ export function ProductsProvider({ children, initialProducts }) {
     }
   };
 
-  const createProduct = async (formData, categories) => {
+  const createProduct = async (productData) => {
     setIsLoading(true);
     try {
-      const data = Object.fromEntries(formData);
-      const imageUrl = await productService.uploadImage(data.image);
-      const newCategories = categories.map((cat) => {
+      const imageUrl = await productService.uploadImage(productData.image);
+      const newCategories = productData.category.map((cat) => {
         return cat.toLowerCase().replaceAll(" ", "-");
       });
 
       const product = {
-        ...data,
+        ...productData,
         category: newCategories,
         image: imageUrl,
       };
@@ -70,20 +69,20 @@ export function ProductsProvider({ children, initialProducts }) {
     }
   };
 
-  const updateProduct = async (formData, categories, productId) => {
+  const updateProduct = async (productData, productId) => {
     setIsLoading(true);
     try {
-      const newCategories = categories.map((cat) => {
+      const newCategories = productData.category.map((cat) => {
         return cat.toLowerCase().replaceAll(" ", "-");
       });
 
-      if (formData.image instanceof File) {
-        const imageUrl = await productService.uploadImage(formData.image);
-        formData.image = imageUrl;
+      if (productData.image instanceof File) {
+        const imageUrl = await productService.uploadImage(productData.image);
+        productData.image = imageUrl;
       }
 
       const product = {
-        ...formData,
+        ...productData,
         category: newCategories,
       };
 
