@@ -2,7 +2,7 @@
 "use client";
 
 import { useProducts } from "@/context/products";
-import { Button, Input, Select, SelectItem } from "@heroui/react";
+import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
 import { Check, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -18,13 +18,16 @@ export default function ProductForm({
   const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [inputError, setInputError] = useState("");
-  const [formUpdateData, setFormUpdateData] = useState({
+  const [multipleCodes, setMultipleCodes] = useState(false);
+  const [codeEntries, setCodeEntries] = useState([
+    { sku: "", information: "" },
+  ]);
+  const [formData, setFormData] = useState({
     name: "",
     brand: "",
-    code: "",
     image: "",
     sku: "",
-    information: "",
+    infoSku: [],
   });
   const inputRef = useRef(null);
   const { isLoading, createProduct, error, updateProduct } = useProducts();
@@ -37,13 +40,27 @@ export default function ProductForm({
     setCategoriesMerged(categories?.map(({ label }) => label));
     if (productToUpdate) {
       setSelectedCategories(new Set([...productToUpdateCategories]));
-      setFormUpdateData({
-        name: productToUpdate.name || "",
-        brand: productToUpdate.brand || "",
-        code: productToUpdate.code || "",
-        image: productToUpdate.image || "",
-        sku: productToUpdate.sku || "",
-        information: productToUpdate.information || "",
+
+      if (productToUpdate.infoSku?.length > 0) {
+        setMultipleCodes(true);
+        setCodeEntries(
+          productToUpdate.infoSku.map((item) => ({
+            sku: item.sku || "",
+            information: item.information || "",
+          }))
+        );
+        setFormData({
+          ...productToUpdate,
+          sku: "",
+        });
+        return;
+      }
+
+      setMultipleCodes(false);
+      setCodeEntries([{ sku: "", information: "" }]);
+      setFormData({
+        ...productToUpdate,
+        infoSku: [],
       });
     }
   }, [categories, productToUpdate]);
@@ -53,6 +70,23 @@ export default function ProductForm({
       inputRef.current.focus();
     }
   }, [isCreatingNewCategory]);
+
+  const handleCodeChange = (index, field, value) => {
+    const newEntries = [...codeEntries];
+    newEntries[index][field] = value;
+    setCodeEntries(newEntries);
+  };
+
+  const addCodeEntry = () => {
+    setCodeEntries([...codeEntries, { sku: "", information: "" }]);
+  };
+
+  const removeCodeEntry = (index) => {
+    if (codeEntries.length > 1) {
+      const newEntries = codeEntries.filter((_, i) => i !== index);
+      setCodeEntries(newEntries);
+    }
+  };
 
   const handleAddCategory = () => {
     const trimmedCategory = newCategory.trim();
@@ -96,33 +130,67 @@ export default function ProductForm({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormUpdateData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormUpdateData((prev) => ({ ...prev, image: file }));
+    setFormData((prev) => ({ ...prev, image: file }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-
     const newCategories = Array.from(selectedCategories);
 
+    let productData = {};
+
+    if (multipleCodes) {
+      const newCodeEntries = codeEntries.map((entry) => ({
+        sku: entry.sku,
+        information: entry.information,
+      }));
+
+      productData = {
+        ...formData,
+        category: newCategories,
+        infoSku: newCodeEntries,
+      };
+    } else {
+      productData = {
+        ...formData,
+        category: newCategories,
+        infoSku: [],
+      };
+    }
+
     try {
-      if (productToUpdate) {
-        await updateProduct(formUpdateData, newCategories, productToUpdate.id);
-      } else {
-        await createProduct(formData, newCategories);
+      if (!productToUpdate) {
+        await createProduct(productData);
+        resetForm(e);
+        return;
       }
 
-      e.target.reset();
-      setIsCreatingNewCategory(false);
-      setIsOpen(false);
+      await updateProduct(productData, productToUpdate.id);
+      setIsOpen();
     } catch (err) {
       console.error(err, error);
     }
+  };
+
+  const resetForm = (e) => {
+    e.target.reset();
+    setFormData({
+      name: "",
+      brand: "",
+      image: "",
+      sku: "",
+      infoSku: [],
+    });
+    setCodeEntries([{ sku: "", information: "" }]);
+    setSelectedCategories([]);
+    setMultipleCodes(false);
+    setIsCreatingNewCategory(false);
+    setIsOpen();
   };
 
   return (
@@ -133,7 +201,7 @@ export default function ProductForm({
           label="Nombre"
           variant="bordered"
           radius="sm"
-          value={formUpdateData.name || ""}
+          value={formData.name || ""}
           onChange={handleInputChange}
           isRequired
         />
@@ -142,21 +210,100 @@ export default function ProductForm({
           label="Marca"
           variant="bordered"
           radius="sm"
-          value={formUpdateData.brand || ""}
+          value={formData.brand || ""}
           onChange={handleInputChange}
           isRequired
         />
       </div>
 
-      <Input
-        name="code"
-        label="Código"
-        variant="bordered"
-        radius="sm"
-        value={formUpdateData.code || ""}
-        isRequired
-        onChange={handleInputChange}
-      />
+      <div className="grid gap-2">
+        <div className="flex items-center gap-3">
+          <Checkbox
+            radius="sm"
+            color="white"
+            isSelected={multipleCodes}
+            onValueChange={(isChecked) => {
+              setMultipleCodes(isChecked);
+              if (isChecked) {
+                setFormData((prev) => ({ ...prev, sku: "" }));
+                return;
+              }
+              setCodeEntries([{ sku: "", information: "" }]);
+            }}
+          />
+          <span className="text-sm font-medium">
+            ¿Contiene múltiples códigos?
+          </span>
+        </div>
+
+        {!multipleCodes ? (
+          <Input
+            name="sku"
+            label="sku"
+            variant="bordered"
+            radius="sm"
+            value={formData.sku}
+            onChange={handleInputChange}
+            isRequired
+            className="uppercase"
+          />
+        ) : (
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold">Códigos del Producto</h3>
+              <Button
+                variant="bordered"
+                radius="sm"
+                startContent={<Plus size={16} />}
+                onPress={addCodeEntry}
+              >
+                Agregar código
+              </Button>
+            </div>
+
+            {codeEntries.map((entry, index) => (
+              <div key={index} className="">
+                <div className="flex gap-3">
+                  <Input
+                    label={`sku ${index + 1}`}
+                    variant="bordered"
+                    radius="sm"
+                    value={entry.sku}
+                    onChange={(e) => {
+                      handleCodeChange(index, "sku", e.target.value);
+                    }}
+                    className="uppercase"
+                    isRequired={index >= 0}
+                  />
+
+                  <Input
+                    label={`Información ${index + 1}`}
+                    variant="bordered"
+                    radius="sm"
+                    value={entry.information}
+                    onChange={(e) => {
+                      handleCodeChange(index, "information", e.target.value);
+                    }}
+                    placeholder="Ej. color, tamaño, etc."
+                    isRequired={index >= 0}
+                  />
+                  {index > 0 && (
+                    <Button
+                      isIconOnly
+                      variant="light"
+                      color="danger"
+                      onPress={() => removeCodeEntry(index)}
+                      className="h-[56px]"
+                    >
+                      <X size={16} />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
@@ -259,28 +406,6 @@ export default function ProductForm({
             handleFileChange(e);
           }}
         />
-      </div>
-
-      <div className="grid gap-2">
-        <label className="font-semibold">Información Adicional</label>
-        <div className="flex gap-3">
-          <Input
-            name="sku"
-            label="SKU"
-            variant="bordered"
-            radius="sm"
-            value={formUpdateData.sku || ""}
-            onChange={handleInputChange}
-          />
-          <Input
-            name="information"
-            label="Información"
-            variant="bordered"
-            radius="sm"
-            value={formUpdateData.information || ""}
-            onChange={handleInputChange}
-          />
-        </div>
       </div>
 
       <div className="flex gap-3 justify-end">
