@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Autoplay, Navigation, Pagination, Virtual } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "@/styles/Slide.css";
-import Image from "next/image";
 
 export default function SlideSection({
   id,
