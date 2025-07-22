@@ -11,9 +11,9 @@ export default function Product({
   image,
   name,
   brand,
-  code,
+  sku,
   category,
-  infoCode,
+  infoSku,
   links,
 }) {
   const [clicked, handleClicked] = useToggle();
@@ -37,10 +37,10 @@ export default function Product({
             <Button className="px-5! text-sm" onClick={handleClicked}>
               Ver más
             </Button>
-            {!infoCode && (
+            {!infoSku && (
               <span className="text-xs capitalize">
                 <span className="uppercase">cod: </span>
-                {code}
+                {sku}
               </span>
             )}
           </div>
@@ -68,17 +68,17 @@ export default function Product({
               <span>Disponible</span>
               <span className="text-end text-whatsapp">✔</span>
             </div>
-            {infoCode && (
+            {infoSku && (
               <div className="overflow-y-scroll max-h-32">
-                {infoCode &&
-                  infoCode.map(({ info, code }) => {
+                {infoSku &&
+                  infoSku.map(({ sku, information }) => {
                     return (
                       <div
-                        key={`${info}${code}`}
+                        key={`${sku}${information}`}
                         className="grid grid-cols-[var(--grid-modal-product-features)] justify-between"
                       >
-                        <span className="text-xs">{info}</span>
-                        <span className="text-xs">{code}</span>
+                        <span className="text-xs">{information}</span>
+                        <span className="text-xs">{sku}</span>
                       </div>
                     );
                   })}
@@ -112,7 +112,7 @@ export default function Product({
                 .map((cat) => cat.label)
                 .join(
                   ", "
-                )}\nCódigo: ${code}\nMarca: ${brand}\nImagen: ${image}`;
+                )}\nCódigo: ${sku}\nMarca: ${brand}\nImagen: ${image}`;
               const url = `https://wa.me/${phone}?text=${encodeURI(message)}`;
               window.open(url, "_blank");
             }}
