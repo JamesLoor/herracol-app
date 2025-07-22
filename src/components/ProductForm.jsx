@@ -4,6 +4,7 @@
 import { useProducts } from "@/context/products";
 import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
 import { Check, Plus, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function ProductForm({
@@ -391,6 +392,22 @@ export default function ProductForm({
 
       <div className="grid gap-2">
         <label className="font-semibold">Imagen del Producto</label>
+        {formData.image && (
+          <div className="w-full h-64 flex items-center justify-center">
+            <Image
+              src={
+                formData?.image instanceof File
+                  ? URL.createObjectURL(formData.image)
+                  : formData.image
+              }
+              alt="Vista previa"
+              width={700}
+              height={700}
+              className="rounded-lg w-full h-full object-contain"
+            />
+          </div>
+        )}
+
         <Input
           name="image"
           type="file"
