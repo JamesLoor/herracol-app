@@ -42,7 +42,17 @@ export default function ProductTableRow({
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-900">{product.code}</div>
+        {product.sku ? (
+          <div className="text-sm text-gray-900">{product.sku}</div>
+        ) : (
+          <div className="text-sm text-gray-900">
+            {product.infoSku.map(({ sku, information }) => (
+              <div key={sku}>
+                {sku} - {information}
+              </div>
+            ))}
+          </div>
+        )}
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
