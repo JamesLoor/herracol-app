@@ -2,7 +2,7 @@
 
 import { useToggle } from "@/hooks/useToggle";
 import { ChevronDown, Funnel, Plus, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProducts } from "../context/products";
 import Modal from "./Modal";
 import ModalHeader from "./ModalHeader";
@@ -10,7 +10,7 @@ import ProductForm from "./ProductForm";
 import ProductTable from "./ProductTable";
 
 export default function ProductManagement() {
-  const { products, categories } = useProducts();
+  const { products, categories, counter, setCounter } = useProducts();
   const [isOpenModal, setIsOpenModal] = useToggle();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
@@ -39,6 +39,14 @@ export default function ProductManagement() {
 
   const productsToShow = search ? producstBySearch : ProductsByCategory;
 
+  useEffect(() => {
+    setCounter(productsToShow?.length);
+    return () => {
+      setCounter(products?.length);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productsToShow]);
+
   return (
     <div className="grid gap-4 md:gap-6">
       <div className="flex justify-between items-center">
@@ -65,7 +73,9 @@ export default function ProductManagement() {
           <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">
             Lista de Productos
           </h2>
-          <p className="text-sm text-gray-600">4 producto(s) encontrado(s)</p>
+          <p className="text-sm text-gray-600">
+            {counter} producto(s) encontrado(s)
+          </p>
         </div>
 
         <div className="grid sm:flex items-center gap-4">
