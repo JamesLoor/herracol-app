@@ -155,6 +155,7 @@ export default function ProductForm({
         ...formData,
         category: newCategories,
         infoSku: newCodeEntries,
+        sku: "",
       };
     } else {
       productData = {
@@ -225,11 +226,6 @@ export default function ProductForm({
             isSelected={multipleCodes}
             onValueChange={(isChecked) => {
               setMultipleCodes(isChecked);
-              if (isChecked) {
-                setFormData((prev) => ({ ...prev, sku: "" }));
-                return;
-              }
-              setCodeEntries([{ sku: "", information: "" }]);
             }}
           />
           <span className="text-sm font-medium">
