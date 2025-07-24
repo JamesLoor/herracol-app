@@ -1,6 +1,7 @@
 "use client";
 
 import { productService } from "@/sevices/product";
+import { Alert } from "@heroui/react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ProductsContext = createContext();
@@ -12,6 +13,11 @@ export function ProductsProvider({ children, initialProducts }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+    isVisible: false,
+  });
 
   useEffect(() => {
     const categories = products?.map((product) => product.category).flat();
@@ -19,6 +25,17 @@ export function ProductsProvider({ children, initialProducts }) {
     const categoriesWithoutDuplicates = Array.from(set).map(JSON.parse);
     setCategories(categoriesWithoutDuplicates);
   }, [products]);
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type, isVisible: true });
+    setTimeout(() => {
+      setAlert({ message: "", type: "", isVisible: false });
+    }, 3000);
+  };
+
+  const hideAlert = () => {
+    setAlert({ message: "", type: "", isVisible: false });
+  };
 
   const loadProducts = async () => {
     setIsLoading(true);
@@ -60,10 +77,11 @@ export function ProductsProvider({ children, initialProducts }) {
       };
 
       await productService.createProduct(product);
+      showAlert("Producto creado correctamente", "success");
       await loadProducts();
     } catch (error) {
       setError("Error al crear el producto");
-      alert(error);
+      showAlert("Error al crear el producto", "error");
     } finally {
       setIsLoading(false);
     }
@@ -87,10 +105,11 @@ export function ProductsProvider({ children, initialProducts }) {
       };
 
       await productService.updateProduct(product, productId);
+      showAlert("Producto actualizado correctamente", "success");
       await loadProducts();
     } catch (error) {
       setError("Error al actualizar el producto");
-      alert(error);
+      showAlert("Error al actualizar el producto", "error");
     } finally {
       setIsLoading(false);
     }
@@ -100,10 +119,11 @@ export function ProductsProvider({ children, initialProducts }) {
     setIsLoading(true);
     try {
       await productService.deleteProduct(productId);
+      showAlert("Producto eliminado correctamente", "success");
       await loadProducts();
     } catch (error) {
       setError("Error al eliminar el producto");
-      alert(error);
+      showAlert("Error al eliminar el producto", "error");
     } finally {
       setIsLoading(false);
     }
@@ -127,6 +147,14 @@ export function ProductsProvider({ children, initialProducts }) {
         deleteProduct,
       }}
     >
+      <Alert
+        className="fixed top-2 right-2 sm:top-5 sm:right-5 w-[80dvw] sm:w-auto z-50"
+        color={alert.type}
+        description={alert.message}
+        isVisible={alert.isVisible}
+        variant="faded"
+        onClose={() => hideAlert()}
+      />
       {children}
     </ProductsContext.Provider>
   );

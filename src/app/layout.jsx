@@ -71,11 +71,13 @@ export default async function RootLayout({ children }) {
   });
   return (
     <ClerkProvider localization={mergedLocalization} afterSignOutUrl="/admin">
-      <ProductsProvider initialProducts={newProducts}>
-        <html lang="es" className={lato.className}>
-          <body className="overflow-visible!">{children}</body>
-        </html>
-      </ProductsProvider>
+      <html lang="es" className={lato.className}>
+        <body className="overflow-visible!">
+          <ProductsProvider initialProducts={newProducts}>
+            {children}
+          </ProductsProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
