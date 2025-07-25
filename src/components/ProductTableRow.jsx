@@ -1,4 +1,4 @@
-import { Chip } from "@heroui/react";
+import { Button, Chip } from "@heroui/react";
 import { SquarePen, Trash2 } from "lucide-react";
 import Image from "next/image";
 
@@ -27,21 +27,26 @@ export default function ProductTableRow({
         </div>
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-6 py-4">
         <div className="text-sm text-gray-900 capitalize">{product.brand}</div>
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-6 py-4">
         <div className="flex flex-wrap gap-1">
           {product.category.map(({ label, slug }) => (
-            <Chip key={slug} color="secondary" className="text-xs capitalize">
+            <Chip
+              key={slug}
+              variant="faded"
+              color="primary"
+              className="text-xs capitalize"
+            >
               {label}
             </Chip>
           ))}
         </div>
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap">
+      <td className="px-6 py-4">
         {product.sku ? (
           <div className="text-sm text-gray-900">{product.sku}</div>
         ) : (
@@ -57,18 +62,26 @@ export default function ProductTableRow({
 
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center justify-center space-x-2">
-          <button
-            onClick={() => onToggledUpdateModal(product)}
-            className="text-blue-600 hover:text-blue-800 cursor-pointer"
+          <Button
+            isIconOnly
+            aria-label="Like"
+            variant="light"
+            color="default"
+            className="text-blue-600"
+            onPress={() => onToggledUpdateModal(product)}
           >
             <SquarePen width={18} height={18} />
-          </button>
-          <button
-            onClick={() => onToggledDeleteModal(product)}
-            className="text-red-600 hover:text-red-800 cursor-pointer"
+          </Button>
+
+          <Button
+            isIconOnly
+            aria-label="Like"
+            variant="light"
+            color="danger"
+            onPress={() => onToggledDeleteModal(product)}
           >
             <Trash2 width={18} height={18} />
-          </button>
+          </Button>
         </div>
       </td>
     </tr>
