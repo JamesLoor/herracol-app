@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = process.env.FIREBASE_REALTIME_DATABASE_API;
+const url = process.env.NEXT_PUBLIC_FIREBASE_REALTIME_DATABASE_API;
 
 const getProducts = async () => {
   const response = await axios.get(`${url}/products.json`);
