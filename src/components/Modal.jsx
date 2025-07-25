@@ -1,4 +1,4 @@
-export default function Modal({ children, className, isOpen, onClose }) {
+export default function Modal({ children, className, isOpen }) {
   return (
     <div
       className={`${
@@ -6,7 +6,6 @@ export default function Modal({ children, className, isOpen, onClose }) {
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
       } fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition-opacity duration-300`}
-      onClick={onClose}
     >
       <div
         className={` ${
