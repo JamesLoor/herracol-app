@@ -57,7 +57,11 @@ export default function ProductTable({ products }) {
         </table>
       </div>
 
-      <Modal isOpen={isOpenModal} className="grid gap-4 p-6 md:max-w-[600px]">
+      <Modal
+        isOpen={isOpenModal}
+        className="grid gap-4 p-6 md:max-w-[600px]"
+        onClose={setIsOpenModal}
+      >
         <ModalHeader
           title="Editar Producto"
           description="Modifica la información del producto"
@@ -75,6 +79,7 @@ export default function ProductTable({ products }) {
       <Modal
         isOpen={isOpenDeleteModal}
         className="grid gap-4 p-6 md:max-w-[600px]"
+        onClose={setIsOpenDeleteModal}
       >
         <ModalHeader
           title="Eliminar Producto"
