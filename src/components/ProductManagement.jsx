@@ -125,7 +125,11 @@ export default function ProductManagement() {
 
         <ProductTable products={productsToShow} />
 
-        <Modal isOpen={isOpenModal} className="grid gap-4 p-6 md:max-w-[600px]">
+        <Modal
+          isOpen={isOpenModal}
+          className="grid gap-4 p-6 md:max-w-[600px]"
+          onClose={setIsOpenModal}
+        >
           <ModalHeader
             title="Crear Nuevo Producto"
             description="Completa la información del nuevo producto"
