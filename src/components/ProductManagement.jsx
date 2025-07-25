@@ -25,7 +25,7 @@ export default function ProductManagement() {
     );
   });
 
-  const producstBySearch = products?.filter((product) => {
+  const productsBySearch = products?.filter((product) => {
     return product.name.toLowerCase().includes(search.toLowerCase());
   });
 
@@ -37,7 +37,7 @@ export default function ProductManagement() {
     setSearch(e.target.value);
   };
 
-  const productsToShow = search ? producstBySearch : ProductsByCategory;
+  const productsToShow = search ? productsBySearch : ProductsByCategory;
 
   useEffect(() => {
     setCounter(productsToShow?.length);
