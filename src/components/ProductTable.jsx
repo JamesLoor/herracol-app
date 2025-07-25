@@ -38,8 +38,12 @@ export default function ProductTable({ products }) {
         <table className="w-full">
           <thead className="border-b border-gray-200">
             <tr>
-              {productTableLabels.map(({ key, name }) => (
-                <ProductTableHeaderCell key={key} label={name} />
+              {productTableLabels.map(({ key, name }, index, array) => (
+                <ProductTableHeaderCell
+                  key={key}
+                  label={name}
+                  isLast={index === array.length - 1}
+                />
               ))}
             </tr>
           </thead>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Tooltip } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,20 +11,23 @@ export default function AdminSidebarItem({ label, href, icon, isDisabled }) {
   return (
     <li
       className={`
-      flex gap-2 p-2 text-sm border-none h-8 rounded transition-all duration-100
-      ${
-        isDisabled
-          ? "cursor-default text-gray-400 opacity-70"
-          : "cursor-pointer hover:text-blue-700 hover:font-bold"
-      }
-      ${isActive ? "text-blue-700 font-bold" : "text-black"}
+      flex gap-2 p-2 text-sm border-none h-8 rounded transition-all duration-100 text-black hover:bg-gray-100
+      ${isActive ? "bg-gray-100 font-bold" : "text-gray-600"}
+      ${isDisabled && "cursor-default  opacity-50 hover:bg-transparent"}
     `}
     >
       {isDisabled ? (
-        <div className="flex items-center gap-2 select-none">
-          {icon}
-          {label}
-        </div>
+        <Tooltip
+          isDisabled={!isDisabled}
+          color="foreground"
+          content={"Proximamente"}
+          placement={"right"}
+        >
+          <div className="flex items-center gap-2 select-none">
+            {icon}
+            {label}
+          </div>
+        </Tooltip>
       ) : (
         <Link className="flex items-center gap-2 w-full" href={href}>
           {icon}

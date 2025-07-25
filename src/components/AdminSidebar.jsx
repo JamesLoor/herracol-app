@@ -36,17 +36,12 @@ export default function AdminSidebar({ isOpen, onToggledSidebar }) {
         )}
         <button className="flex items-center gap-2 p-2">
           <figure>
-            <Image
-              src="/assets/footer-logo.png"
-              alt="logo"
-              width={32}
-              height={32}
-            />
+            <Image src="/assets/logo.png" alt="logo" width={32} height={32} />
           </figure>
           <span className="flex flex-col text-sm font-semibold">
-            AdminPanel
-            <span className="text-xs font-medium text-gray-500">
-              E-commerce
+            Administrador
+            <span className="text-xs font-medium text-gray-500 text-left">
+              Herracol
             </span>
           </span>
         </button>
