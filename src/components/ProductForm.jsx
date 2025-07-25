@@ -305,7 +305,7 @@ export default function ProductForm({
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <Select
-            className="flex-1 min-w-[200px]"
+            className="flex-1"
             label="Categorías"
             selectionMode="multiple"
             variant="bordered"
