@@ -1,5 +1,4 @@
 import { ProductsProvider } from "@/context/products";
-import { productService } from "@/sevices/product";
 import { esMX } from "@clerk/localizations";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Lato } from "next/font/google";
@@ -55,27 +54,27 @@ const localization = {
 const mergedLocalization = { ...esMX, ...localization };
 
 export default async function RootLayout({ children }) {
-  const products = await productService.getProducts();
-  const newProducts = products.map((product) => {
-    const newCategories = product.category.map((category) => {
-      return {
-        label: category.toLowerCase().replaceAll("-", " "),
-        slug: category.toLowerCase(),
-      };
-    });
+  // TODO: Use this when implement cache revalidate
+  // const products = await productService.getProducts();
+  // const newProducts = products.map((product) => {
+  //   const newCategories = product.category.map((category) => {
+  //     return {
+  //       label: category.toLowerCase().replaceAll("-", " "),
+  //       slug: category.toLowerCase(),
+  //     };
+  //   });
 
-    return {
-      ...product,
-      category: newCategories,
-    };
-  });
+  //   return {
+  //     ...product,
+  //     category: newCategories,
+  //   };
+  // });
+
   return (
     <ClerkProvider localization={mergedLocalization} afterSignOutUrl="/admin">
       <html lang="es" className={lato.className}>
         <body className="overflow-visible!">
-          <ProductsProvider initialProducts={newProducts}>
-            {children}
-          </ProductsProvider>
+          <ProductsProvider>{children}</ProductsProvider>
         </body>
       </html>
     </ClerkProvider>

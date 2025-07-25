@@ -7,7 +7,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ProductsContext = createContext();
 
 export function ProductsProvider({ children, initialProducts }) {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(initialProducts || []);
   const [counter, setCounter] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +18,12 @@ export function ProductsProvider({ children, initialProducts }) {
     type: "",
     isVisible: false,
   });
+
+  useEffect(() => {
+    if (!initialProducts) {
+      loadProducts();
+    }
+  }, []);
 
   useEffect(() => {
     const categories = products?.map((product) => product.category).flat();
