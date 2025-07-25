@@ -8,7 +8,7 @@ export default function Dropdown({
 }) {
   return (
     <div className="relative">
-      <button onClick={toggleDropdown}>
+      <button onClick={toggleDropdown} className="font-bold cursor-pointer">
         <Label />
       </button>
 
