@@ -316,6 +316,9 @@ export default function ProductForm({
             selectedKeys={selectedCategories}
             onSelectionChange={setSelectedCategories}
             isRequired
+            scrollShadowProps={{
+              hideScrollBar: false,
+            }}
           >
             {categoriesMerged?.map((category) => (
               <SelectItem
