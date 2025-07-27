@@ -1,5 +1,6 @@
 "use client";
 
+import { contactPhone } from "@/config";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -94,8 +95,11 @@ const content = [
       },
       {
         key: "celular",
-        route: "tel:+593983245586",
-        label: "+593 98 324 5586",
+        route: `tel:+${contactPhone}`,
+        label: `+${contactPhone.slice(0, 3)}  ${contactPhone.slice(
+          3,
+          5
+        )} ${contactPhone.slice(5, 8)} ${contactPhone.slice(8)}`,
         component: "a",
       },
     ],
