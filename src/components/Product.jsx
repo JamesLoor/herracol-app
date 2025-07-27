@@ -107,7 +107,7 @@ export default function Product({
           <Button
             className="bg-whatsapp flex items-center gap-2 text-white px-5!"
             onClick={() => {
-              const phone = "593983245586";
+              const phone = "593990898417";
               const message = `Hola, estoy interesado en el siguiente producto\n*${name}*\nCategoría: ${category
                 .map((cat) => cat.label)
                 .join(
