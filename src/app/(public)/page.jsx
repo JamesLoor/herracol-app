@@ -51,20 +51,22 @@ export default function Home() {
         <h2 className="text-2xl lg:text-4xl font-bold text-center">
           Nuestras Marcas
         </h2>
-        <figure className="grid gap-3 lg:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {brands.map(({ route, alt }) => {
-            return (
-              <Image
-                key={alt}
-                src={route}
-                alt={alt}
-                width={300}
-                height={300}
-                quality={100}
-                className="w-full h-auto"
-              />
-            );
-          })}
+        <figure className="grid gap-3 lg:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5">
+          {brands
+            .filter(({ disabled }) => !disabled)
+            .map(({ route, alt }) => {
+              return (
+                <Image
+                  key={alt}
+                  src={route}
+                  alt={alt}
+                  width={300}
+                  height={300}
+                  quality={100}
+                  className="w-full h-auto"
+                />
+              );
+            })}
         </figure>
       </section>
     </>
@@ -102,6 +104,10 @@ const brands = [
     alt: "Logo Germany",
   },
   {
+    route: "https://www.maxmetal.com.br/site/static/images/logo.svg",
+    alt: "Logo Max ",
+  },
+  {
     route: "/assets/brands/logoGavilan.png",
     alt: "Logo Gavilan",
   },
@@ -112,6 +118,7 @@ const brands = [
   {
     route: "/assets/brands/logoColima.png",
     alt: "Logo Colima",
+    disabled: true,
   },
   {
     route: "/assets/brands/logoAbro.png",
@@ -128,6 +135,7 @@ const brands = [
   {
     route: "/assets/brands/logoCaribe.png",
     alt: "Logo Caribe",
+    disabled: true,
   },
   {
     route: "/assets/brands/logoTEKBOND.png",
@@ -136,9 +144,10 @@ const brands = [
   {
     route: "/assets/brands/logoPractiagro.png",
     alt: "Logo Practiagro",
+    disabled: true,
   },
   {
     route: "/assets/brands/logoAgrimix.png",
     alt: "Logo Agrimix",
   },
-];
+].filter(({ disabled }) => !disabled);
