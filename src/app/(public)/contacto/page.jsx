@@ -95,12 +95,14 @@ export default function Contact() {
   );
 }
 
+const contactPhone = "593990898417";
+
 const contactMethods = [
   {
     id: "whatsapp",
     icon: "/icons/whatsapp.svg",
-    href: "https://wa.me/593983245586",
-    label: "+593 98 324 5586",
+    href: `https://wa.me/${contactPhone}`,
+    label: `+593 99 089 8417`,
     target: "_blank",
     prefetch: false,
   },
