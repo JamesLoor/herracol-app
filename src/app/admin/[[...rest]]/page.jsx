@@ -14,7 +14,6 @@ export default function Admin() {
             logoImageUrl: "/assets/logoHerracolSA.png",
           },
         }}
-        forceRedirectUrl="/admin/dashboard"
       />
     </section>
   );
