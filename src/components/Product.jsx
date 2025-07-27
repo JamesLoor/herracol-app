@@ -1,3 +1,4 @@
+import { contactPhone } from "@/config";
 import { useToggle } from "@/hooks/useToggle";
 import Image from "next/image";
 import Link from "next/link";
@@ -107,7 +108,7 @@ export default function Product({
           <Button
             className="bg-whatsapp flex items-center gap-2 text-white px-5!"
             onClick={() => {
-              const phone = "593990898417";
+              const phone = contactPhone;
               const message = `Hola, estoy interesado en el siguiente producto\n*${name}*\nCategoría: ${category
                 .map((cat) => cat.label)
                 .join(

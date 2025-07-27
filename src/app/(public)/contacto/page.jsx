@@ -20,6 +20,7 @@ import ContactForm from "@/components/ContactForm";
 import Input from "@/components/Input";
 import Map from "@/components/Map";
 import Textarea from "@/components/Textarea";
+import { contactPhone } from "@/config";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -95,14 +96,15 @@ export default function Contact() {
   );
 }
 
-const contactPhone = "593990898417";
-
 const contactMethods = [
   {
     id: "whatsapp",
     icon: "/icons/whatsapp.svg",
     href: `https://wa.me/${contactPhone}`,
-    label: `+593 99 089 8417`,
+    label: `+${contactPhone.slice(0, 3)}  ${contactPhone.slice(
+      3,
+      5
+    )} ${contactPhone.slice(5, 8)} ${contactPhone.slice(8)}`,
     target: "_blank",
     prefetch: false,
   },
