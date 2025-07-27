@@ -31,7 +31,7 @@ export default function ProductForm({
     infoSku: [],
   });
   const inputRef = useRef(null);
-  const { isLoading, createProduct, error, updateProduct } = useProducts();
+  const { isLoading, createProduct, updateProduct } = useProducts();
 
   const productToUpdateCategories = productToUpdate?.category.map(
     ({ label }) => label
@@ -175,7 +175,7 @@ export default function ProductForm({
       await updateProduct(productData, productToUpdate.id);
       setIsOpen();
     } catch (err) {
-      console.error(err, error);
+      console.error(err);
     }
   };
 
