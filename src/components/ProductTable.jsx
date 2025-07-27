@@ -28,7 +28,7 @@ export default function ProductTable({ products }) {
   };
 
   const handleDeleteProduct = () => {
-    deleteProduct(productToDelete.id);
+    deleteProduct(productToDelete);
     setIsOpenDeleteModal();
   };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { productService } from "@/sevices/product";
+import { productService } from "@/services/product.service";
 import { Alert } from "@heroui/react";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -11,7 +11,6 @@ export function ProductsProvider({ children, initialProducts }) {
   const [counter, setCounter] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
   const [alert, setAlert] = useState({
     message: "",
@@ -62,7 +61,8 @@ export function ProductsProvider({ children, initialProducts }) {
       });
       setProducts(newProducts);
     } catch (error) {
-      setError("Error al cargar los productos");
+      console.error(error);
+      showAlert("Error al cargar los productos", "error");
     } finally {
       setIsLoading(false);
     }
@@ -80,13 +80,15 @@ export function ProductsProvider({ children, initialProducts }) {
         ...productData,
         category: newCategories,
         image: imageUrl,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
 
       await productService.createProduct(product);
       showAlert("Producto creado correctamente", "success");
       await loadProducts();
     } catch (error) {
-      setError("Error al crear el producto");
+      console.error(error);
       showAlert("Error al crear el producto", "error");
     } finally {
       setIsLoading(false);
@@ -105,30 +107,43 @@ export function ProductsProvider({ children, initialProducts }) {
         productData.image = imageUrl;
       }
 
+      const { id, ...productWithoutId } = productData;
       const product = {
-        ...productData,
+        ...productWithoutId,
         category: newCategories,
+        updatedAt: new Date().toISOString(),
       };
 
       await productService.updateProduct(product, productId);
       showAlert("Producto actualizado correctamente", "success");
       await loadProducts();
     } catch (error) {
-      setError("Error al actualizar el producto");
+      console.error(error);
       showAlert("Error al actualizar el producto", "error");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const deleteProduct = async (productId) => {
+  const deleteProduct = async (product) => {
     setIsLoading(true);
     try {
-      await productService.deleteProduct(productId);
+      const newCategories = product.category.map((cat) => {
+        return cat.toLowerCase().replaceAll(" ", "-");
+      });
+
+      const { id, ...productWithoutId } = product;
+      const updatedProduct = {
+        ...productWithoutId,
+        category: newCategories,
+        isDeleted: true,
+        updatedAt: new Date().toISOString(),
+      };
+      await productService.updateProduct(updatedProduct, product.id);
       showAlert("Producto eliminado correctamente", "success");
       await loadProducts();
     } catch (error) {
-      setError("Error al eliminar el producto");
+      console.error(error);
       showAlert("Error al eliminar el producto", "error");
     } finally {
       setIsLoading(false);
@@ -145,7 +160,6 @@ export function ProductsProvider({ children, initialProducts }) {
         searchValue,
         setSearchValue,
         isLoading,
-        error,
         createProduct,
         loadProducts,
         categories,
