@@ -1,9 +1,12 @@
+import { Product, ProductResponse } from "@/types/product";
 import axios from "axios";
 
 const url = process.env.NEXT_PUBLIC_FIREBASE_REALTIME_DATABASE_API;
 
-const getProducts = async () => {
-  const response = await axios.get(`${url}/products.json`);
+const getProducts = async (): Promise<ProductResponse[]> => {
+  const response = await axios.get<{
+    [key: string]: ProductResponse;
+  }>(`${url}/products.json`);
 
   const products = Object.entries(response.data || {})
     ?.map(([key, product]) => {
@@ -17,12 +20,11 @@ const getProducts = async () => {
   return products;
 };
 
-const createProduct = async (product) => {
-  const response = await axios.post(`${url}/products.json`, product);
-  return response.data;
+const createProduct = async (product: Product): Promise<void> => {
+  await axios.post(`${url}/products.json`, product);
 };
 
-const uploadImage = async (image) => {
+const uploadImage = async (image: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", image);
 
@@ -35,14 +37,12 @@ const uploadImage = async (image) => {
   return response.data.url;
 };
 
-const updateProduct = async (product, id) => {
-  const response = await axios.patch(`${url}/products/${id}.json`, product);
-  return response.data;
+const updateProduct = async (product: Product, id: string): Promise<void> => {
+  await axios.patch(`${url}/products/${id}.json`, product);
 };
 
-const deleteProduct = async (id) => {
-  const response = await axios.delete(`${url}/products/${id}.json`);
-  return response.data;
+const deleteProduct = async (id: string): Promise<void> => {
+  await axios.delete(`${url}/products/${id}.json`);
 };
 
 export const productService = {
