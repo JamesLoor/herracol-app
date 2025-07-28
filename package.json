@@ -11,23 +11,25 @@
   "dependencies": {
     "@clerk/localizations": "3.16.1",
     "@clerk/nextjs": "6.20.0",
-    "@clerk/types": "4.59.1",
     "@heroui/react": "^2.8.0-beta.7",
-    "@tailwindcss/postcss": "4.1.8",
-    "autoprefixer": "10.4.14",
     "axios": "1.9.0",
-    "eslint": "8.40.0",
-    "eslint-config-next": "15.1.8",
     "framer-motion": "^12.16.0",
     "lucide-react": "0.511.0",
-    "next": "15.1.8",
-    "postcss": "8.5.4",
+    "next": "15.4.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "swiper": "9.3.2",
-    "tailwindcss": "4.1.8"
+    "swiper": "9.3.2"
   },
   "devDependencies": {
-    "tailwind-scrollbar": "3.0.4"
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "4.1.8",
+    "@clerk/types": "4.59.1",
+    "tailwindcss": "4.1.8",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.8",
+    "@eslint/eslintrc": "^3"
   }
 }
