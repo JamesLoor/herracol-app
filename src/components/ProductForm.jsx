@@ -2,7 +2,14 @@
 "use client";
 
 import { useProducts } from "@/context/products";
-import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
+import {
+  Button,
+  Checkbox,
+  Input,
+  Select,
+  SelectItem,
+  Switch,
+} from "@heroui/react";
 import { Check, Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -29,6 +36,7 @@ export default function ProductForm({
     image: "",
     sku: "",
     infoSku: [],
+    isActive: false,
   });
   const inputRef = useRef(null);
   const { isLoading, createProduct, updateProduct } = useProducts();
@@ -143,27 +151,18 @@ export default function ProductForm({
     e.preventDefault();
     const newCategories = Array.from(selectedCategories);
 
-    let productData = {};
-
-    if (multipleCodes) {
-      const newCodeEntries = codeEntries.map((entry) => ({
-        sku: entry.sku,
-        information: entry.information,
-      }));
-
-      productData = {
-        ...formData,
-        category: newCategories,
-        infoSku: newCodeEntries,
-        sku: "",
-      };
-    } else {
-      productData = {
-        ...formData,
-        category: newCategories,
-        infoSku: [],
-      };
-    }
+    let productData = {
+      ...formData,
+      isActive: formData.isActive,
+      category: newCategories,
+      sku: multipleCodes ? "" : formData.sku,
+      infoSku: multipleCodes
+        ? codeEntries.map((entry) => ({
+            sku: entry.sku,
+            information: entry.information,
+          }))
+        : [],
+    };
 
     try {
       if (!productToUpdate) {
@@ -387,6 +386,31 @@ export default function ProductForm({
             )}
           </div>
         </div>
+      </div>
+
+      <div className="flex items-center justify-between shadow-xs border-medium border-default-200 px-2 py-3 rounded-sm">
+        <div className="grid gap-1">
+          <label className="text-sm font-semibold">Estado del Producto</label>
+          {formData.isActive ? (
+            <span className="text-xs text-gray-500">
+              El producto estará visible y se mostrará en la página de productos
+            </span>
+          ) : (
+            <span className="text-xs text-gray-500">
+              El producto estará oculto y no se mostrará en la página de
+              productos
+            </span>
+          )}
+        </div>
+
+        <Switch
+          size="sm"
+          color="success"
+          isSelected={formData.isActive}
+          onValueChange={(isChecked) => {
+            setFormData((prev) => ({ ...prev, isActive: isChecked }));
+          }}
+        />
       </div>
 
       <div className="grid gap-2">

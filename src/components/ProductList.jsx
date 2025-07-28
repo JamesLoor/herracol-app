@@ -5,6 +5,7 @@ import Product from "@/components/Product";
 import Search from "@/components/Search";
 import { useProducts } from "@/context/products";
 import { useToggle } from "@/hooks/useToggle";
+import { Spinner } from "@heroui/react";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -12,13 +13,17 @@ export default function ProductList({ category }) {
   const [clicked, handleClicked] = useToggle();
   const { products, counter, setCounter, searchValue } = useProducts();
 
+  const filteredProductsByStatus = products?.filter(
+    (product) => product.isActive
+  );
+
   const filteredProductsByCategory = category
-    ? products?.filter((product) =>
+    ? filteredProductsByStatus?.filter((product) =>
         product.category.some(
           (cat) => cat.slug.toLowerCase() === category.toLowerCase()
         )
       )
-    : products;
+    : filteredProductsByStatus;
 
   const filteredBySearch = filteredProductsByCategory?.filter((product) =>
     product.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -62,7 +67,7 @@ export default function ProductList({ category }) {
 
         {products?.length === 0 && (
           <div className="w-full grid place-items-center">
-            <div className="w-10 h-10 border-t-2 border-b-2 border-primary rounded-full animate-spin"></div>
+            <Spinner color="primary" />
           </div>
         )}
 
