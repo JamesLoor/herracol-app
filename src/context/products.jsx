@@ -140,14 +140,12 @@ export function ProductsProvider({ children, initialProducts }) {
   const deleteProduct = async (product) => {
     setIsLoading(true);
     try {
-      const newCategories = product.category.map((cat) => {
-        return cat.toLowerCase().replaceAll(" ", "-");
-      });
-
       const { id, ...productWithoutId } = product;
       const updatedProduct = {
         ...productWithoutId,
-        category: newCategories,
+        category: product.category.map((c) =>
+          c.slug.toLowerCase().replaceAll(" ", "-")
+        ),
         isDeleted: true,
         updatedAt: new Date().toISOString(),
       };
