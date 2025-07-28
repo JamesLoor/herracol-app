@@ -5,7 +5,7 @@ import Image from "next/image";
 import MenuCategoryItem from "./MenuCategoryItem";
 
 export default function MenuCategory({ clicked, onClose }) {
-  const { categories } = useProducts();
+  const { activeCategories } = useProducts();
 
   return (
     <nav
@@ -31,7 +31,7 @@ export default function MenuCategory({ clicked, onClose }) {
               onClose={onClose}
             />
           </li>
-          {categories?.map(({ label, slug }) => {
+          {activeCategories?.map(({ label, slug }) => {
             return (
               <li key={slug}>
                 <MenuCategoryItem

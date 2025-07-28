@@ -130,6 +130,10 @@ const productTableLabels = [
     name: "Código",
   },
   {
+    key: "status",
+    name: "Estado",
+  },
+  {
     key: "actions",
     name: "Acciones",
   },

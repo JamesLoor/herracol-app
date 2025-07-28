@@ -10,13 +10,13 @@ export default function ProductTableRow({
   return (
     <tr className="hover:bg-gray-50">
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+        <div className="w-10 h-10 p-1 border border-gray-300 rounded-lg flex items-center justify-center overflow-hidden">
           <Image
             src={product.image || "/placeholder.svg"}
             alt={product.name}
-            width={40}
-            height={40}
-            className="w-8 h-8 object-cover rounded"
+            width={300}
+            height={300}
+            className="w-full h-full object-contain"
           />
         </div>
       </td>
@@ -58,6 +58,22 @@ export default function ProductTableRow({
             ))}
           </div>
         )}
+      </td>
+
+      <td className="px-6 py-4">
+        <div className="text-sm text-gray-900 flex items-center gap-1">
+          {product.isActive ? (
+            <>
+              <span className="inline-block w-2 h-2 rounded-full mr-2 bg-success" />
+              <span className="text-xs text-success">Activo</span>
+            </>
+          ) : (
+            <>
+              <span className="inline-block w-2 h-2 rounded-full mr-2 bg-gray-500" />
+              <span className="text-xs text-gray-500">Inactivo</span>
+            </>
+          )}
+        </div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">

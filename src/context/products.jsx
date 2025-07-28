@@ -12,11 +12,19 @@ export function ProductsProvider({ children, initialProducts }) {
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [activeCategories, setActiveCategories] = useState([]);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
     isVisible: false,
   });
+
+  const getCategoriesWithoutDuplicates = (products) => {
+    const categories = products?.map((product) => product.category).flat();
+    const set = new Set(categories.map(JSON.stringify));
+    const categoriesWithoutDuplicates = Array.from(set).map(JSON.parse);
+    return categoriesWithoutDuplicates;
+  };
 
   useEffect(() => {
     if (!initialProducts) {
@@ -25,10 +33,14 @@ export function ProductsProvider({ children, initialProducts }) {
   }, []);
 
   useEffect(() => {
-    const categories = products?.map((product) => product.category).flat();
-    const set = new Set(categories.map(JSON.stringify));
-    const categoriesWithoutDuplicates = Array.from(set).map(JSON.parse);
-    setCategories(categoriesWithoutDuplicates);
+    const productsActive = products?.filter((product) => product.isActive);
+    const categories = getCategoriesWithoutDuplicates(productsActive);
+    setActiveCategories(categories);
+  }, [products]);
+
+  useEffect(() => {
+    const categories = getCategoriesWithoutDuplicates(products);
+    setCategories(categories);
   }, [products]);
 
   const showAlert = (message, type) => {
@@ -163,6 +175,7 @@ export function ProductsProvider({ children, initialProducts }) {
         createProduct,
         loadProducts,
         categories,
+        activeCategories,
         updateProduct,
         deleteProduct,
       }}
