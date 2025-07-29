@@ -19,18 +19,18 @@ export function ProductsProvider({ children, initialProducts }) {
     isVisible: false,
   });
 
+  useEffect(() => {
+    if (!initialProducts) {
+      loadProducts();
+    }
+  }, []);
+
   const getCategoriesWithoutDuplicates = (products) => {
     const categories = products?.map((product) => product.category).flat();
     const set = new Set(categories.map(JSON.stringify));
     const categoriesWithoutDuplicates = Array.from(set).map(JSON.parse);
     return categoriesWithoutDuplicates;
   };
-
-  useEffect(() => {
-    if (!initialProducts) {
-      loadProducts();
-    }
-  }, []);
 
   useEffect(() => {
     const productsActive = products?.filter((product) => product.isActive);
@@ -42,6 +42,16 @@ export function ProductsProvider({ children, initialProducts }) {
     const categories = getCategoriesWithoutDuplicates(products);
     setCategories(categories);
   }, [products]);
+
+  function normalizeSlug(slug) {
+    return slug
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/ñ/g, "n")
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+  }
 
   const showAlert = (message, type) => {
     setAlert({ message, type, isVisible: true });
@@ -58,20 +68,7 @@ export function ProductsProvider({ children, initialProducts }) {
     setIsLoading(true);
     try {
       const products = await productService.getProducts();
-      const newProducts = products.map((product) => {
-        const newCategory = product.category.map((cat) => {
-          return {
-            label: cat.toLowerCase().replaceAll("-", " "),
-            slug: cat.toLowerCase(),
-          };
-        });
-
-        return {
-          ...product,
-          category: newCategory,
-        };
-      });
-      setProducts(newProducts);
+      setProducts(products);
     } catch (error) {
       console.error(error);
       showAlert("Error al cargar los productos", "error");
@@ -85,7 +82,10 @@ export function ProductsProvider({ children, initialProducts }) {
     try {
       const imageUrl = await productService.uploadImage(productData.image);
       const newCategories = productData.category.map((cat) => {
-        return cat.toLowerCase().replaceAll(" ", "-");
+        return {
+          label: cat.toLowerCase(),
+          slug: normalizeSlug(cat),
+        };
       });
 
       const product = {
@@ -111,7 +111,10 @@ export function ProductsProvider({ children, initialProducts }) {
     setIsLoading(true);
     try {
       const newCategories = productData.category.map((cat) => {
-        return cat.toLowerCase().replaceAll(" ", "-");
+        return {
+          label: cat.toLowerCase(),
+          slug: normalizeSlug(cat),
+        };
       });
 
       if (productData.image instanceof File) {
@@ -143,9 +146,6 @@ export function ProductsProvider({ children, initialProducts }) {
       const { id, ...productWithoutId } = product;
       const updatedProduct = {
         ...productWithoutId,
-        category: product.category.map((c) =>
-          c.slug.toLowerCase().replaceAll(" ", "-")
-        ),
         isDeleted: true,
         updatedAt: new Date().toISOString(),
       };

@@ -4,7 +4,7 @@ export type Product = {
   name: string;
   description: string;
   price: number;
-  category: string[];
+  category: { label: string; slug: string }[];
   image: string;
   isActive: boolean;
   isDeleted: boolean;
