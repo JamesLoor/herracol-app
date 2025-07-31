@@ -22,13 +22,13 @@ export default function ProductTableRow({
       </td>
 
       <td className="px-6 py-4 max-w-[300px]">
-        <div className="text-sm font-medium text-gray-900 capitalize">
+        <div className="text-sm font-medium text-gray-900 uppercase">
           {product.name}
         </div>
       </td>
 
       <td className="px-6 py-4">
-        <div className="text-sm text-gray-900 capitalize">{product.brand}</div>
+        <div className="text-sm text-gray-900 uppercase">{product.brand}</div>
       </td>
 
       <td className="px-6 py-4">

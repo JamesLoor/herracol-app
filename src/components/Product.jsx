@@ -31,8 +31,8 @@ export default function Product({
         </figure>
         <div className="grid gap-3 p-1">
           <div>
-            <h4 className="text-sm font-bold capitalize">{name}</h4>
-            <span className="text-xs capitalize">{brand}</span>
+            <h4 className="text-sm font-bold uppercase">{name}</h4>
+            <span className="text-xs uppercase">{brand}</span>
           </div>
           <div className="flex justify-between items-center">
             <Button className="px-5! text-sm" onClick={handleClicked}>

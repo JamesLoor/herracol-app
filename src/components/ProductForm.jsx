@@ -153,6 +153,8 @@ export default function ProductForm({
 
     let productData = {
       ...formData,
+      name: formData.name.toLowerCase().trim(),
+      brand: formData.brand.toLowerCase().trim(),
       isActive: formData.isActive,
       category: newCategories,
       sku: multipleCodes ? "" : formData.sku,
