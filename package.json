@@ -2,6 +2,8 @@
   "name": "herracol-app",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -21,15 +23,15 @@
     "swiper": "9.3.2"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "4.1.8",
     "@clerk/types": "4.59.1",
-    "tailwindcss": "4.1.8",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "4.1.8",
+    "@types/node": "^24.1.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.8",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "4.1.8",
+    "typescript": "^5.8.3"
   }
 }
