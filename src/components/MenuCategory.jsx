@@ -46,13 +46,15 @@ export default function MenuCategory({ clicked, onClose }) {
 
         <h4 className="text-white font-semibold mt-5">Catálogo Herracol</h4>
         <ul className="grid gap-2">
-          {catalogsHerracol.map((item) => {
-            return (
-              <li key={item.id} className="grid gap-2">
-                <MenuCategoryItem {...item} onClose={onClose} />
-              </li>
-            );
-          })}
+          {catalogsHerracol
+            .filter((c) => !c.disabled)
+            .map((item) => {
+              return (
+                <li key={item.id} className="grid gap-2">
+                  <MenuCategoryItem {...item} onClose={onClose} />
+                </li>
+              );
+            })}
         </ul>
 
         <h4 className="text-white font-semibold mt-5">Catálogo Bosco</h4>
@@ -96,6 +98,7 @@ const catalogsHerracol = [
     category: "FLIP (Libro)",
     route: "https://online.fliphtml5.com/mfsdq/qmxs",
     target: "_blank",
+    disabled: true,
   },
 ];
 
