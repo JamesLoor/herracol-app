@@ -7,11 +7,12 @@ import { useProducts } from "@/context/products";
 import { useToggle } from "@/hooks/useToggle";
 import { Spinner } from "@heroui/react";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProductList({ category }) {
   const [clicked, handleClicked] = useToggle();
-  const { products, counter, setCounter, searchValue } = useProducts();
+  const { products, searchValue } = useProducts();
+  const [counter, setCounter] = useState(0);
 
   const filteredProductsByStatus = products?.filter(
     (product) => product.isActive

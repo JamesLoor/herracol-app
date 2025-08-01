@@ -10,10 +10,11 @@ import ProductForm from "./ProductForm";
 import ProductTable from "./ProductTable";
 
 export default function ProductManagement() {
-  const { products, categories, counter, setCounter } = useProducts();
+  const { products, categories } = useProducts();
   const [isOpenModal, setIsOpenModal] = useToggle();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
+  const [counter, setCounter] = useState(0);
 
   const ProductsByCategory = products?.filter((product) => {
     if (selectedCategory === "all") {
