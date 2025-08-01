@@ -129,7 +129,7 @@ export function ProductsProvider({ children, initialProducts }) {
         updatedAt: new Date().toISOString(),
       };
 
-      await productService.updateProduct(product, productId);
+      await productService.updateProduct(productId, product);
       showAlert("Producto actualizado correctamente", "success");
       await loadProducts();
     } catch (error) {
@@ -143,13 +143,10 @@ export function ProductsProvider({ children, initialProducts }) {
   const deleteProduct = async (product) => {
     setIsLoading(true);
     try {
-      const { id, ...productWithoutId } = product;
-      const updatedProduct = {
-        ...productWithoutId,
+      await productService.updateProduct(product.id, {
         isDeleted: true,
         updatedAt: new Date().toISOString(),
-      };
-      await productService.updateProduct(updatedProduct, product.id);
+      });
       showAlert("Producto eliminado correctamente", "success");
       await loadProducts();
     } catch (error) {

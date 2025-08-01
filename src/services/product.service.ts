@@ -17,7 +17,9 @@ const getProducts = async (): Promise<ProductResponse[]> => {
     })
     .filter((p) => !p.isDeleted);
 
-  return products;
+  return products.toSorted((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
 };
 
 const createProduct = async (product: Product): Promise<void> => {
@@ -37,7 +39,10 @@ const uploadImage = async (image: File): Promise<string> => {
   return response.data.url;
 };
 
-const updateProduct = async (product: Product, id: string): Promise<void> => {
+const updateProduct = async (
+  id: string,
+  product: Partial<Product>
+): Promise<void> => {
   await axios.patch(`${url}/products/${id}.json`, product);
 };
 
