@@ -8,7 +8,6 @@ const ProductsContext = createContext();
 
 export function ProductsProvider({ children, initialProducts }) {
   const [products, setProducts] = useState(initialProducts || []);
-  const [counter, setCounter] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -162,8 +161,6 @@ export function ProductsProvider({ children, initialProducts }) {
       value={{
         products,
         setProducts,
-        counter,
-        setCounter,
         searchValue,
         setSearchValue,
         isLoading,
