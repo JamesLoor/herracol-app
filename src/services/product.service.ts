@@ -5,7 +5,7 @@ const url = process.env.NEXT_PUBLIC_FIREBASE_REALTIME_DATABASE_API;
 
 const getProducts = async (): Promise<ProductResponse[]> => {
   const response = await axios.get<{
-    [key: string]: ProductResponse;
+    [key: string]: Product;
   }>(`${url}/products.json`);
 
   const products = Object.entries(response.data || {})
@@ -15,11 +15,12 @@ const getProducts = async (): Promise<ProductResponse[]> => {
         id: key,
       };
     })
+    .toSorted((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    })
     .filter((p) => !p.isDeleted);
 
-  return products.toSorted((a, b) => {
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  });
+  return products;
 };
 
 const createProduct = async (product: Product): Promise<void> => {
