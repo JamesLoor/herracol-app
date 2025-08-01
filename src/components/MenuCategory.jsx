@@ -89,16 +89,8 @@ const catalogsHerracol = [
   {
     id: "herracol-001",
     category: "PDF",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FHerracol%2FCatalogoHerracol2022.pdf?alt=media",
+    route: `https://vidres.ec/files/herracol-catalogo-2022.pdf`,
     target: "_blank",
-  },
-  {
-    id: "herracol-002",
-    category: "FLIP (Libro)",
-    route: "https://online.fliphtml5.com/mfsdq/qmxs",
-    target: "_blank",
-    disabled: true,
   },
 ];
 
@@ -106,8 +98,7 @@ const catalogsBosco = [
   {
     id: "bosco-001",
     category: "Cadenas Motosierra",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FBosco%2FCadenasBosco.pdf?alt=media",
+    route: `https://vidres.ec/files/bosco-cadenas.pdf`,
     target: "_blank",
   },
 ];
@@ -116,36 +107,31 @@ const catalogsAgrimix = [
   {
     id: "agrimix-001",
     category: "Agrimix",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FAgrimix%2FAgrimix%20Presentacion%20Espanol.pdf?alt=media",
+    route: `https://vidres.ec/files/agrimix.pdf`,
     target: "_blank",
   },
   {
     id: "agrimix-002",
     category: "Productos 1",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FAgrimix%2FPresentacion%20Agrimix.pdf?alt=media",
+    route: `https://vidres.ec/files/agrimix-productos-1.pdf`,
     target: "_blank",
   },
   {
     id: "agrimix-003",
     category: "Productos 2",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FAgrimix%2FAgrimix%20-%20Presentacion%20Cuchillas-Extractor%20etc.pdf?alt=media",
+    route: `https://vidres.ec/files/agrimix-productos-2.pdf`,
     target: "_blank",
   },
   {
     id: "agrimix-004",
     category: "Cosechadora De Caña",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FAgrimix%2FPresentaci%C3%B3n%20del%20Mando%20Final%20COMER%20-%20Cosechadora%20de%20Ca%C3%B1a.pdf?alt=media",
+    route: `https://vidres.ec/files/agrimix-cosechadora.pdf`,
     target: "_blank",
   },
   {
     id: "agrimix-005",
     category: "Componentes",
-    route:
-      "https://firebasestorage.googleapis.com/v0/b/herracol-api-8820d.appspot.com/o/catalogue%2FAgrimix%2FCapuchones-convertido.pdf?alt=media",
+    route: `https://vidres.ec/files/agrimix-componentes.pdf`,
     target: "_blank",
   },
 ];
